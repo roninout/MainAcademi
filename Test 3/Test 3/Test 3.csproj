@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{59D92B76-B387-4F26-9C19-940D2AE2E6A8}</ProjectGuid>
+    <ProjectGuid>{410F573D-ED01-45AA-BD46-874B49184B49}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Tset2</RootNamespace>
-    <AssemblyName>Tset2</AssemblyName>
+    <RootNamespace>Test_3</RootNamespace>
+    <AssemblyName>Test 3</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
