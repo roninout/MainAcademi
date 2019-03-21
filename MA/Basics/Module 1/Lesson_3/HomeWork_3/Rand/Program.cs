@@ -46,10 +46,8 @@ namespace Rand
                 Console.ResetColor();
 
                 string choise = Console.ReadLine();
-                if (choise.ToUpper() == "EXIT")
-                    break;
-                else
-                    userNumber = Int32.Parse(choise);
+                if (choise.ToUpper() == "EXIT") break;
+                userNumber = Int32.Parse(choise);
                 count++;
                 Console.Clear();
             }
