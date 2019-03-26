@@ -27,7 +27,6 @@ namespace CSharp_Net_module1_1_4_lab
 
             public Computer(ComputerType computerType) : this()
             {
-                _computerType = computerType;
                 switch (computerType)
                 {
                     case ComputerType.Desktop:
