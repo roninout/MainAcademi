@@ -82,21 +82,44 @@ namespace Hello_Console_stud
         #region ToFromUnary
         static void My_strings()
         {
-           //Declare int and string variables for decimal and binary presentations
+            //Declare int and string variables for decimal and binary presentations
+            //int a, b;
+            //Console.WriteLine("Enter position number: ");
+            //Console.ForegroundColor = ConsoleColor.DarkMagenta;
 
-           //Implement two positive integer variables input
+            //a = (int)uint.Parse(Console.ReadLine());
 
-           //To present each of them in the form of unary string use for loop
+            //Console.WriteLine("");
 
-           //Use concatenation of these two strings 
-           //Note it is necessary to use some symbol ( for example “#”) to separate
+            //b = (int)uint.Parse(Console.ReadLine());
 
-           //Check the numbers on the equality 0
-           //Realize the  algorithm for replacing '1#1' to '#' by using the for loop 
-           //Delete the '#' from algorithm result
+            //string aStr = String.Empty, bStr = String.Empty;
 
-           //Output the result 
-         }
+            //for (int i = 0; i < a; i++)
+            //{
+            //    aStr += "1";
+            //}
+
+            //for (int i = 0; i < b; i++)
+            //{
+            //    bStr += "1";
+            //}
+
+
+            string result
+            //Implement two positive integer variables input
+
+            //To present each of them in the form of unary string use for loop
+
+            //Use concatenation of these two strings 
+            //Note it is necessary to use some symbol ( for example “#”) to separate
+
+            //Check the numbers on the equality 0
+            //Realize the  algorithm for replacing '1#1' to '#' by using the for loop 
+            //Delete the '#' from algorithm result
+
+            //Output the result 
+        }
         #endregion
 
         #region My_music

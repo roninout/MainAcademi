@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CSharp_Net_module1_1_4_lab
 {
@@ -10,15 +7,15 @@ namespace CSharp_Net_module1_1_4_lab
     {
         // 1) declare enum ComputerType
         public enum ComputerType
-	    {
+        {
             Desktop,
             Laptop,
             Server
-	    }
+        }
 
         // 2) declare struct Computer
         public struct Computer
-	    {
+        {
             public ComputerType _computerType;
             public int _CPU;
             public double _frequency;
@@ -36,7 +33,7 @@ namespace CSharp_Net_module1_1_4_lab
                         InitComputerByType(computerType, 2, 1.7, 4, 250);
                         break;
                     case ComputerType.Server:
-                        InitComputerByType(computerType, 8, 3, 16, 2000);
+                        InitComputerByType(computerType, 8, 3, 16, 2048);
                         break;
                     default:
                         InitComputerByType(computerType, 0, 0, 0, 0);
@@ -97,14 +94,14 @@ namespace CSharp_Net_module1_1_4_lab
             // 7) count total number of all computers
             // Note: use loops and if-else statements
             // Note: use the same loop for 6) and 7)
-            int countAll = 0, countDesctop = 0, countLaptop = 0, countServer = 0;
+            int countAll = 0, countDesktop = 0, countLaptop = 0, countServer = 0;
 
             foreach (var departmen in departments)
             {
                 foreach (var computer in departmen)
                 {
                     if (computer._computerType == ComputerType.Desktop)
-                        countDesctop++;
+                        countDesktop++;
                     if (computer._computerType == ComputerType.Laptop)
                         countLaptop++;
                     if (computer._computerType == ComputerType.Server)
@@ -112,7 +109,7 @@ namespace CSharp_Net_module1_1_4_lab
                     countAll++;
                 }
             }
-            Console.WriteLine($"All - {countAll}, Desktop - {countDesctop}, Laptop - {countLaptop}, Server - {countServer}");
+            Console.WriteLine($"All - {countAll}, Desktop - {countDesktop}, Laptop - {countLaptop}, Server - {countServer}");
             Console.WriteLine();
 
             // 8) find computer with the largest storage (HDD) - 
@@ -189,6 +186,6 @@ namespace CSharp_Net_module1_1_4_lab
 
             Console.ReadKey();
         }
- 
+
     }
 }
