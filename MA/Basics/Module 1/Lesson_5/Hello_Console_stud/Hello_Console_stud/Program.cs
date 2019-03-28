@@ -12,8 +12,8 @@ namespace Hello_Console_stud
             {
                 do
                 {
-                        Console.ForegroundColor = ConsoleColor.White;
-                        Console.WriteLine(@"Please,  type the number:
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine(@"Please,  type the number:
                     1.  f(a,b) = |a-b| (unary)
                     2.  f(a) = a (binary)
                     3.  music
@@ -27,20 +27,20 @@ namespace Hello_Console_stud
                         {
                             case 1:
                                 My_strings();
-                                Console.WriteLine("");
+                                Console.WriteLine(string.Empty);
                                 break;
                             case 2:
                                 My_Binary();
-                                Console.WriteLine("");
+                                Console.WriteLine(string.Empty);
                                 break;
                             case 3:
                                 My_music();
-                                Console.WriteLine("");
+                                Console.WriteLine(string.Empty);
                                 break;
                             case 4:
                                 Morse_code();
-                                Console.WriteLine("");
-                                break;                   
+                                Console.WriteLine(string.Empty);
+                                break;
                             default:
                                 Console.WriteLine("Exit");
                                 break;
@@ -49,8 +49,8 @@ namespace Hello_Console_stud
                     }
                     catch (Exception e)
                     {
-                        Console.WriteLine("Error"+e.Message);
-                    }                   
+                        Console.WriteLine("Error" + e.Message);
+                    }
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine("Press Spacebar to exit; press any key to continue");
                     Console.ForegroundColor = ConsoleColor.White;
@@ -78,7 +78,7 @@ namespace Hello_Console_stud
 
             //Present it like binary string
             while (input > 0)
-            {               
+            {
                 result += input % 2; //Use modulus operator to obtain the remainder  (n % 2)               
                 input = input / 2;   //and divide variable by 2 in the loop
             }
@@ -101,12 +101,14 @@ namespace Hello_Console_stud
             Array.Reverse(fixBinArray); // переворачиваем
             result = new string(fixBinArray); // и опять в строку
             Console.WriteLine($" Результат преобразования: {saveInput} = {result}");
+
+            Console.WriteLine(Convert.ToString(44, 2)); // а можно и так ))
         }
 
         //For ToBinary String recursion
         static void GetBinary(int a, ref string str)
         {
-            if (a > 1)  GetBinary(a / 2, ref str);
+            if (a > 1) GetBinary(a / 2, ref str);
             str += (a % 2).ToString();
         }
 
@@ -223,22 +225,69 @@ namespace Hello_Console_stud
 
         #region Morse
         static void Morse_code()
-        {   
-            //Create string variable for 'sos'      
+        {
+            Console.WriteLine();
+            //Create string variable for 'sos'
+            string word = "sos";
 
             //Use string array for Morse code
-            string[,] Dictionary_arr = new string [,] { { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" },
+            string[,] Dictionary_arr = new string[,] { { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" },
             { ".-   ", "-... ", "-.-. ", "-..  ", ".    ", "..-. ", "--.  ", ".... ", "..   ", ".--- ", "-.-  ", ".-.. ", "--   ", "-.   ", "---  ", ".--. ", "--.- ", ".-.  ", "...  ", "-    ", "..-  ", "...- ", ".--  ", "-..- ", "-.-- ", "--.. ", "-----", ".----", "..---", "...--", "....-", ".....", "-....", "--...", "---..", "----." }};
+
             //Use ToCharArray() method for string to copy charecters to Unicode character array
+            char[] wordChar = word.ToLower().ToCharArray();
+            char[] morseChar = null;
+
             //Use foreach loop for character array in which
-
-                //Implement Console.Beep(1000, 250) for '.'
-                // and Console.Beep(1000, 750) for '-'
-
-                //Use Thread.Sleep(50) to separate sounds
-            //                  
+            foreach (char sosCharItem in wordChar)     // проходим по буквам слова
+            {
+                morseChar = FindMorseSimbol(Dictionary_arr, sosCharItem.ToString());
+                if (morseChar != null)                // проверка на отсутсвие символа
+                {
+                    Console.Write($"{sosCharItem} "); // выводим символы на экран
+                    Console.WriteLine(morseChar);     // не понятно?????
+                    PlayMorseChar(morseChar);         // проигрываем морзе символ
+                }
+            }
         }
 
+        // поиск морзе-символов по букве 
+        private static char[] FindMorseSimbol(string[,] Dictionary_arr, string simbol)
+        {
+            char[] result = null;
+            //int rows = Dictionary_arr.GetUpperBound(0) + 1;
+            //int columns = Dictionary_arr.Length / rows;
+            for (int i = 0; i < Dictionary_arr.GetUpperBound(1) + 1; i++)
+            {
+                if (Dictionary_arr[0, i] == simbol)
+                    result = Dictionary_arr[1, i].ToCharArray();
+            }
+            return result;
+        }
+
+        // проигрываем морзе символ
+        private static void PlayMorseChar(char[] morseChar)
+        {
+            foreach (char morseCharItem in morseChar)
+            {
+                switch (morseCharItem)
+                {
+                    case '.':
+                        Console.Beep(1000, 250); //Implement Console.Beep(1000, 250) for '.'
+                        Thread.Sleep(50); //Use Thread.Sleep(50) to separate sounds
+                        break;
+                    case '-':
+                        Console.Beep(1000, 750); // and Console.Beep(1000, 750) for '-'
+                        Thread.Sleep(50); //Use Thread.Sleep(50) to separate sounds
+                        break;
+                    case ' ':
+                        Thread.Sleep(50); //Use Thread.Sleep(50) to separate sounds
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
         #endregion
     }
 }
