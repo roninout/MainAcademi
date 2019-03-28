@@ -65,18 +65,51 @@ namespace Hello_Console_stud
         #region ToFromBinary
         static void My_Binary()
         {
+            char[] binArray, fixBinArray;
+            string result = String.Empty;
+            int input, saveInput;
+
             //Implement positive integer variable input
+            Console.WriteLine("Введите положительное число: ");
+            input = saveInput = Int32.Parse(Console.ReadLine());
+
+            // проверка на положительное число
+            if (input < 0) return;
 
             //Present it like binary string
-            //   For example, 4 as 100
-
-            //Use modulus operator to obtain the remainder  (n % 2) 
-            //and divide variable by 2 in the loop
+            while (input > 0)
+            {               
+                result += input % 2; //Use modulus operator to obtain the remainder  (n % 2)               
+                input = input / 2;   //and divide variable by 2 in the loop
+            }
 
             //Use the ToCharArray() method to transform string to chararray
-            //and Array.Reverse() method
+            int rank = result.Length / 4 + 1; // количество разрядов
+            result = result.PadRight(rank * 4, '0'); // умножаем на 4-е 0-ка
+            binArray = result.ToCharArray();
+            string fixString = binArray[0].ToString(); // строка дополняемая пробелами
 
+            for (int i = 1; i < binArray.Length; i++)
+            {
+                if (i % 4 == 0)       // добавляем пробелы в разрядах
+                    fixString += " ";
+                fixString += binArray[i];
+            }
+
+            //and Array.Reverse() method
+            fixBinArray = fixString.ToCharArray(); // строку в чары
+            Array.Reverse(fixBinArray); // переворачиваем
+            result = new string(fixBinArray); // и опять в строку
+            Console.WriteLine($" Результат преобразования: {saveInput} = {result}");
         }
+
+        //For ToBinary String recursion
+        static void GetBinary(int a, ref string str)
+        {
+            if (a > 1)  GetBinary(a / 2, ref str);
+            str += (a % 2).ToString();
+        }
+
         #endregion
 
         #region ToFromUnary
@@ -87,26 +120,33 @@ namespace Hello_Console_stud
             //Console.WriteLine("Enter position number: ");
             //Console.ForegroundColor = ConsoleColor.DarkMagenta;
 
-            //a = (int)uint.Parse(Console.ReadLine());
+            Console.WriteLine("Enter first positive number: ");
+            Console.ForegroundColor = ConsoleColor.DarkMagenta;
 
-            //Console.WriteLine("");
+            int a = (int)uint.Parse(Console.ReadLine());
 
-            //b = (int)uint.Parse(Console.ReadLine());
+            Console.WriteLine("Enter second positive number: ");
+            Console.ForegroundColor = ConsoleColor.Yellow;
 
-            //string aStr = String.Empty, bStr = String.Empty;
+            int b = (int)uint.Parse(Console.ReadLine());
 
-            //for (int i = 0; i < a; i++)
-            //{
-            //    aStr += "1";
-            //}
+            string aStr = string.Empty, bStr = string.Empty;
 
-            //for (int i = 0; i < b; i++)
-            //{
-            //    bStr += "1";
-            //}
+            for (int i = 0; i < a; i++)
+                aStr += "1";
+
+            for (int i = 0; i < b; i++)
+                bStr += "1";
+
+            Console.ForegroundColor = ConsoleColor.Gray;
+            Console.WriteLine($"aSTr: {aStr}");
+            Console.WriteLine($"bSTr: {bStr}");
+            Console.WriteLine();
+            Console.WriteLine($"Unary result: {new string('1', Math.Abs(aStr.Length - bStr.Length))}");
+
+            Console.WriteLine();
 
 
-            string result
             //Implement two positive integer variables input
 
             //To present each of them in the form of unary string use for loop
