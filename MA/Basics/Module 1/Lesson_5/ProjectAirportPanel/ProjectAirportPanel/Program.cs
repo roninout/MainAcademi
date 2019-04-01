@@ -154,7 +154,7 @@ namespace ProjectAirportPanel
                             Console.Clear();
                             break;
                         case "5": // СТАТУС
-                            Console.Write(@"Для изменения статуса выберите следующие варианты:
+                            Console.WriteLine(@"Для изменения СТАТУСА выберите следующие варианты:
     0 -  регистрация
     1 - гейт закрыт
     2 - прибыл
