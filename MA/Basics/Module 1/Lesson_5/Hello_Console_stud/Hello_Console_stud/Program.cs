@@ -101,8 +101,6 @@ namespace Hello_Console_stud
             Array.Reverse(fixBinArray); // переворачиваем
             result = new string(fixBinArray); // и опять в строку
             Console.WriteLine($" Результат преобразования: {saveInput} = {result}");
-
-            Console.WriteLine(Convert.ToString(44, 2)); // а можно и так ))
         }
 
         //For ToBinary String recursion
@@ -244,8 +242,8 @@ namespace Hello_Console_stud
                 morseChar = FindMorseSimbol(Dictionary_arr, sosCharItem.ToString());
                 if (morseChar != null)                // проверка на отсутсвие символа
                 {
-                    Console.Write($"{sosCharItem} "); // выводим символы на экран
-                    Console.WriteLine(morseChar);     // не понятно?????
+                    Console.WriteLine($"{sosCharItem} {new string(morseChar)}"); // выводим символы на экран
+                    //Console.WriteLine(morseChar);     // не понятно?????
                     PlayMorseChar(morseChar);         // проигрываем морзе символ
                 }
             }
