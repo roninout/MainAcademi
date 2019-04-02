@@ -75,8 +75,9 @@ namespace ProjectAirportPanel
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("ВЫЛЕТЫ САМОЛЕТОВ");
-            Console.WriteLine(new string('-', 25));
+            Console.WriteLine(new string('-', 110));
+            Console.WriteLine($"{"ВЫЛЕТЫ САМОЛЕТОВ", 60}");
+            Console.WriteLine(new string('-', 110));
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"{"Рейс",0}{"Время",11}{"Назначение",27}{"Перевозчик",35}{"Терминал",13}{"Гейт",8}{"Статус",10}");
             Console.ResetColor();
@@ -84,7 +85,7 @@ namespace ProjectAirportPanel
             {
                 Console.WriteLine($"{item.flightNumber,-10}{item.dateTime:dd:MM:yy hh:mm}{item.cityPort,18}{item.airline,35}{item.terminal,10}{item.gate,10}{item.flightStatus,12}");
             }
-            Console.WriteLine(new string('-', 25));
+            Console.WriteLine(new string('-', 110));
             Console.WriteLine();
         }
 
@@ -93,8 +94,9 @@ namespace ProjectAirportPanel
         {
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("ПРИЛЕТЫ САМОЛЕТОВ");
-            Console.WriteLine(new string('-', 25));
+            Console.WriteLine(new string('-', 110));
+            Console.WriteLine($"{"ПРИЛЕТЫ САМОЛЕТОВ",60}");
+            Console.WriteLine(new string('-', 110));
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"{"Рейс",0}{"Время",11}{"Назначение",27}{"Перевозчик",35}{"Терминал",13}{"Статус",18}");
             Console.ResetColor();
@@ -102,7 +104,7 @@ namespace ProjectAirportPanel
             {
                 Console.WriteLine($"{item.flightNumber,-10}{item.dateTime:dd:MM:yy hh:mm}{item.cityPort,18}{item.airline,35}{item.terminal,10}{item.flightStatus,22}");
             }
-            Console.WriteLine(new string('-', 25));
+            Console.WriteLine(new string('-', 110));
             Console.WriteLine();
         }
 
@@ -154,6 +156,7 @@ namespace ProjectAirportPanel
                             Console.Clear();
                             break;
                         case "5": // СТАТУС
+                            Console.WriteLine($"Текущий статус рейса: {flights[selectType].flightStatus}");
                             Console.WriteLine(@"Для изменения СТАТУСА выберите следующие варианты:
     0 -  регистрация
     1 - гейт закрыт
@@ -164,10 +167,8 @@ namespace ProjectAirportPanel
     6 - ожидается в ...
     7 - задерживается
     8 - в полёте");
-
-
-                            //flights[selectType].flightStatus = 4;// int.Parse(Console.ReadLine());
-                            Console.WriteLine($"Терминал был изменен на: { flights[selectType].terminal}.\nДля продолжения нажмите...");
+                            flights[selectType].flightStatus = (FlightStatus)int.Parse(Console.ReadLine());
+                            Console.WriteLine($"Статус был изменен на: { flights[selectType].flightStatus}.\nДля продолжения нажмите...");
                             Console.ReadKey();
                             Console.Clear();
                             break;
@@ -211,7 +212,7 @@ namespace ProjectAirportPanel
             Console.WriteLine($"2 - изменить НАЗНАЧЕНИЕ");
             Console.WriteLine($"3 - изменить ПЕРЕВОЗЧИКА");
             Console.WriteLine($"4 - изменить ТЕРМИНАЛ");
-            //Console.WriteLine($"5 - изменить СТАТУС");
+            Console.WriteLine($"5 - изменить СТАТУС");
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"0 - выход в сновное меню");
             Console.ResetColor();
