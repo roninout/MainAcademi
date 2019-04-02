@@ -132,7 +132,11 @@ namespace ProjectAirportPanel
                     switch (menuSelect)
                     {
                         case "1": // ВРЕМЯ
-                                  //selectedFlight.dateTime = DateTime.Parse(Console.ReadLine());
+                            Console.Write($"Измените пункт ВРЕМЯ { flights[selectType].dateTime} на : ");
+                            flights[selectType].dateTime = DateTime.Parse(Console.ReadLine());
+                            Console.WriteLine($"ВРЕМЯ было изменено на: { flights[selectType].dateTime}.\nДля продолжения нажмите...");
+                            Console.ReadKey();
+                            Console.Clear();
                             break;
                         case "2": // НАЗНАЧЕНИЕ
                             Console.Write($"Измените пункт НАЗНАЧЕНИЯ { flights[selectType].cityPort} на : ");
@@ -208,7 +212,7 @@ namespace ProjectAirportPanel
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"Меню редактирования:");
-            //Console.WriteLine($"1 - изменить ВРЕМЯ");
+            Console.WriteLine($"1 - изменить ВРЕМЯ");
             Console.WriteLine($"2 - изменить НАЗНАЧЕНИЕ");
             Console.WriteLine($"3 - изменить ПЕРЕВОЗЧИКА");
             Console.WriteLine($"4 - изменить ТЕРМИНАЛ");
