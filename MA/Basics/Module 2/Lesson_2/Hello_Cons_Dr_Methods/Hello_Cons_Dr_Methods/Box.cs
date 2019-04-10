@@ -8,10 +8,41 @@ namespace Hello_Cons_Dr_Methods
 {
     class Box
     {
-        //1.  Implement public  auto-implement properties for start position (point position)
-        //auto-implement properties for width and height of the box
-        //and auto-implement properties for a symbol of a given set of valid characters (*, + ,.) to be used for the border 
-        //and a message inside the box
+
+        public (int x, int y) Point { get; set; } = (x: 0, y: 0);
+        public int Width { get; set; }
+        public int Height { get; set; }
+        public char Symbol { get; set; }
+        public string Message { get; set; }
+
+        public Box((int x, int y) point, int height, int width, char symbol)
+        {
+            Point = point;
+            Width = width;
+            Height = height;
+            Symbol = symbol;
+        }
+
+        public void Draw()
+        {
+
+            for (int i = 0; i < Height; i++)
+            {
+                for (int j = 0; j < Width; j++)
+                {
+                    Console.SetCursorPosition(Point.x+ j, Point.y + i);
+                    if (j == 0 || j == Width - 1)
+                        Console.Write(Symbol);
+                    else if
+                       (i == 0 || i == Height - 1)
+                        Console.Write(Symbol);
+                    else
+                        Console.Write(' ');
+                }
+                Console.WriteLine();
+            }
+        }
+
 
         //2.  Implement public Draw() method
         //to define start position, width and height, symbol, message  according to properties
