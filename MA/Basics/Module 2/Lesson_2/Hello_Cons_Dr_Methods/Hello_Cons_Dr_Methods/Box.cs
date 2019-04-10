@@ -30,7 +30,7 @@ namespace Hello_Cons_Dr_Methods
             {
                 for (int j = 0; j < Width; j++)
                 {
-                    Console.SetCursorPosition(Point.x+ j, Point.y + i);
+                    Console.SetCursorPosition(Point.x + j, Point.y + i);
                     if (j == 0 || j == Width - 1)
                         Console.Write(Symbol);
                     else if

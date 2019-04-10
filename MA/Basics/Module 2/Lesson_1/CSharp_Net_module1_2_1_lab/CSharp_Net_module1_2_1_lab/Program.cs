@@ -30,6 +30,8 @@ namespace CSharp_Net_module1_2_1_lab
             user2.RemoveBook("Sherlock Holmes");
             Console.WriteLine("user2.BooksCount "+user2.BooksCount());
 
+            //System.Diagnostics.Debug.WriteLine("dhfhfg");
+
             Console.ReadKey();
 
         }
