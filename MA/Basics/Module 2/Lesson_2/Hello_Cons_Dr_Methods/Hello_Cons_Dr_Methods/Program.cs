@@ -15,9 +15,11 @@ namespace Hello_Cons_Dr_Methods
                 //Implement start position, width and height, symbol, message input
 
                 //Create Box class instance
-                Box box = new Box((25,25), 20, 50, '*');
                 //Use  Box.Draw() method
-                box.Draw();
+                new Box((x: 3, y: 5), 12, 7, '*')
+                {
+                    Message = "12345678910q"
+                }.Draw();
 
                 Console.WriteLine("Press any key...");
             Console.ReadLine();
