@@ -14,7 +14,6 @@ namespace CSharp_Net_module1_2_3_lab
         EU
     }
 
-
     class Money
     {
         // 2) declare 2 properties Amount, CurrencyType
@@ -36,19 +35,20 @@ namespace CSharp_Net_module1_2_3_lab
         public static Money operator +(Money money1, Money money2)
         {
             //return money1.CurrencyTypes == money2.CurrencyTypes ? new Money(money1.Amount + money2.Amount, money1.CurrencyTypes) : null;
-            return new Money(money1.Amount + money2.Amount, money1.CurrencyTypes);
+            return new Money(money1.Amount + money2.Amount);
         }
 
         // 5) declare overloading of operator -- to decrease object of Money by 1
         public static Money operator --(Money money1)
         {
-            return new Money(--money1.Amount, money1.CurrencyTypes);
+            return new Money(--money1.Amount);
         }
 
         // 6) declare overloading of operator * to increase object of Money 3 times
-        public static Money operator *(Money money1, Money money2)
+
+        public static Money operator *(Money money1, int count)
         {
-            return new Money(money1.Amount * money2.Amount, money1.CurrencyTypes);
+            return new Money(money1.Amount * count);
         }
 
         // 7) declare overloading of operator > and < to compare 2 objects of Money
@@ -73,7 +73,7 @@ namespace CSharp_Net_module1_2_3_lab
         }
 
         // 9) declare overloading of implicit/ explicit conversion  to convert Money to double, string and vice versa
-        public static implicit operator Money(double money)
+        public static explicit operator Money(double money)
         {
             return new Money((decimal)money);
         }

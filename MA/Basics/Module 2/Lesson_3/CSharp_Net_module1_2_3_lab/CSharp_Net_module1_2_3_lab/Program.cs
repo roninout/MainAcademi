@@ -11,7 +11,7 @@ namespace CSharp_Net_module1_2_3_lab
         static void Main(string[] args)
         {
             // 10) declare 2 objects
-            Money money1 = new Money(10 , CurrencyTypes.EU);
+            Money money1 = new Money(5 , CurrencyTypes.EU);
             Money money2 = new Money(308, CurrencyTypes.EU);
 
             // 11) do operations
@@ -23,7 +23,7 @@ namespace CSharp_Net_module1_2_3_lab
             // add 1st object of Money and double
             Console.WriteLine($"add 1st object of Money and double:");
             double dValue = 5.67;
-            Console.WriteLine($"money1 {money1.Amount} + double {dValue} = {(money1 + dValue).Amount}");
+            Console.WriteLine($"money1 {money1.Amount} + double {dValue} = {(money1 + (Money)dValue).Amount}");
             Console.WriteLine();
 
             // decrease 2nd object of Money by 1
@@ -33,7 +33,8 @@ namespace CSharp_Net_module1_2_3_lab
 
             // increase 1st object of Money
             Console.WriteLine($"increase 1st object of Money:");
-            Console.WriteLine($"money1 {money1.Amount} * money2 {money2.Amount} = {(money1 * money2).Amount}");
+            int count = 3;
+            Console.WriteLine($"money1 {money1.Amount} * count {count} = {(money1 *= count).Amount}");
             Console.WriteLine();
 
             // compare 2 objects of Money

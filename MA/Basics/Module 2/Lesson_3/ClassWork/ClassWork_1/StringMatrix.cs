@@ -56,5 +56,25 @@ namespace ClassWork_1
             }
             return _resStringMatrix;
         }
+
+        public string StrColumn()
+        {
+            string column = null;
+            for (int i = 0; i < Size2; i++)
+            {
+                column += this[0, i];
+            }
+            return column;
+        }
+
+        public static bool operator >=(StringMatrix tbl1, StringMatrix tbl2)
+        {
+            return String.Compare(tbl1.StrColumn(), tbl2.StrColumn()) >= 0;
+        }
+
+        public static bool operator <=(StringMatrix tbl1, StringMatrix tbl2)
+        {
+            return String.Compare(tbl1.StrColumn(), tbl2.StrColumn()) <= 0;
+        }
     }
 }
