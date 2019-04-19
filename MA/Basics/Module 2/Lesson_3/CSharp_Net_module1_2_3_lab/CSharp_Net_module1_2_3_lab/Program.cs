@@ -11,8 +11,15 @@ namespace CSharp_Net_module1_2_3_lab
         static void Main(string[] args)
         {
             // 10) declare 2 objects
-            Money money1 = new Money(5 , CurrencyTypes.EU);
+            Money money1 = new Money(5 , CurrencyTypes.UAH);
             Money money2 = new Money(308, CurrencyTypes.EU);
+
+            money1.ConvertToUa(ref money1);
+            money2.ConvertToUa(ref money2);
+
+            Console.WriteLine($"money1 {money1.Amount}");
+            Console.WriteLine($"money2 {money2.Amount}");
+            Console.WriteLine();
 
             // 11) do operations
             // add 2 objects of Money

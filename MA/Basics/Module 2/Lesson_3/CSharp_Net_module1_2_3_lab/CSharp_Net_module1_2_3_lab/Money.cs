@@ -35,6 +35,9 @@ namespace CSharp_Net_module1_2_3_lab
         public static Money operator +(Money money1, Money money2)
         {
             //return money1.CurrencyTypes == money2.CurrencyTypes ? new Money(money1.Amount + money2.Amount, money1.CurrencyTypes) : null;
+            //ConvertToUa(ref money1);
+            //ConvertToUa(ref money2);
+
             return new Money(money1.Amount + money2.Amount);
         }
 
@@ -45,7 +48,6 @@ namespace CSharp_Net_module1_2_3_lab
         }
 
         // 6) declare overloading of operator * to increase object of Money 3 times
-
         public static Money operator *(Money money1, int count)
         {
             return new Money(money1.Amount * count);
@@ -91,6 +93,24 @@ namespace CSharp_Net_module1_2_3_lab
             return money.Amount.ToString();
         }
 
+        // конвертирование к UA
+        public void ConvertToUa(ref Money money)
+        {
+            switch (money.CurrencyTypes)
+            {
+                case CurrencyTypes.UAH:
+                    money.Amount = money.Amount;
+                    break;
+                case CurrencyTypes.USD:
+                    money.Amount *= (decimal)27.5;
+                    break;
+                case CurrencyTypes.EU:
+                    money.Amount *= (decimal)32.5;
+                    break;
+                default:
+                    break;
+            }
+        }
 
     }
 }
