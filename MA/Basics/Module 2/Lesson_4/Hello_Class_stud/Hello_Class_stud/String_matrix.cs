@@ -37,7 +37,6 @@ namespace Hello_Class_stud
             string clmn = null;
             for (int j = 0; j < Size2; j++)
             {
-                
                 clmn += this[1, j];               
             }
             return clmn;
