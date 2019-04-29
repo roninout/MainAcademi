@@ -11,7 +11,6 @@ namespace AirlineInfo
         const int tableArrivalLine = 106;
         const int tableDepartureLine = 98;
 
-
         // отображаем основное меню
         public static void DisplayMainMenu()
         {
