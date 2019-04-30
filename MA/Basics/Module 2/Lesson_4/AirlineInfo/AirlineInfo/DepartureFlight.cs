@@ -1,13 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AirlineInfo
 {
     class DepartureFlight : Flight, IDepartureFlight
     {
+        public DepartureFlight() : base()
+        {
+            DateTime = DateTime.Now.AddMinutes(random.Next(0, 500));
+        }
+
         // отображение ПРИЛЁТ-ов
         public override void Show()
         {
