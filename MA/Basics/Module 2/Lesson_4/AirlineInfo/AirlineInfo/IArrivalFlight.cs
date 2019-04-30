@@ -6,9 +6,7 @@ using System.Threading.Tasks;
 
 namespace AirlineInfo
 {
-    interface IArrivalFlight : IFlight
+    interface IArrivalFlight
     {
-        //void Show();
-        //void Edit();
     }
 }

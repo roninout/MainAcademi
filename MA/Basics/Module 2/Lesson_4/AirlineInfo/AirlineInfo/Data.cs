@@ -10,8 +10,6 @@ namespace AirlineInfo
     {
         public static int maxArrivalFlight = 0;
         public static int maxDepartureFlight = 0;
-        public static ArrivalFlight[] arrivalFlights = null;
-        public static DepartureFlight[] departureFlights = null;
 
         #region data
         internal static List<string> flightNumber = new List<string>()
@@ -27,18 +25,20 @@ namespace AirlineInfo
         #endregion
 
         #region init data
-        public static void InitArrivalFlight()
+        public static Flight[] InitArrivalFlight()
         {
-            arrivalFlights = new ArrivalFlight[maxArrivalFlight];
+            Flight[] flights = new Flight[maxArrivalFlight];
             for (int i = 0; i < maxArrivalFlight; i++)
-                arrivalFlights[i] = new ArrivalFlight();
+                flights[i] = new ArrivalFlight();
+            return flights;
         }
 
-        public static void InitDepartureFlight()
+        public static Flight[] InitDepartureFlight()
         {
-            departureFlights = new DepartureFlight[maxDepartureFlight];
+            Flight[] flights = new Flight[maxDepartureFlight];
             for (int i = 0; i < maxDepartureFlight; i++)
-                departureFlights[i] = new DepartureFlight();
+                flights[i] = new DepartureFlight();
+            return flights;
         }
         #endregion
 

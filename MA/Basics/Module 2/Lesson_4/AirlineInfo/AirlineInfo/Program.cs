@@ -12,8 +12,9 @@ namespace AirlineInfo
         {
             Data.maxArrivalFlight = 5;
             Data.maxDepartureFlight = 8;
-            Data.InitArrivalFlight();
-            Data.InitDepartureFlight();
+
+            Flight[] arrivalFlights = Data.InitArrivalFlight();
+            Flight[] departureFlights = Data.InitDepartureFlight();
 
             string menuSelect = String.Empty;
 
@@ -25,16 +26,16 @@ namespace AirlineInfo
                 switch (menuSelect)
                 {
                     case "1":
-                        Table.DisplayFlightsTable(Data.arrivalFlights);
+                        Table.DisplayFlightsTable(arrivalFlights);
                         break;
                     case "2":
-                        Table.DisplayFlightsTable(Data.departureFlights);
+                        Table.DisplayFlightsTable(departureFlights);
                         break;
                     case "3":
-                        Table.DisplayEditTable(Data.arrivalFlights);
+                        Table.DisplayEditTable(arrivalFlights);
                         break;
                     case "4":
-                        Table.DisplayEditTable(Data.departureFlights);
+                        Table.DisplayEditTable(departureFlights);
                         break;
                     case "0":
                         break;
@@ -43,7 +44,6 @@ namespace AirlineInfo
                         break;
                 }
             }
-
             Console.ReadKey();
         }
     }

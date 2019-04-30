@@ -46,31 +46,31 @@ namespace AirlineInfo
         }
 
         // отображение табло ВЫЛЕТ-ов / ПРИЛЁТ-ов
-        public static void DisplayFlightsTable(IFlight[] flights, bool type = true)
+        public static void DisplayFlightsTable(Flight[] flights, bool type = true)
         {
             Console.Clear();
-            Console.ForegroundColor = flights is IArrivalFlight[] ? ConsoleColor.Cyan : ConsoleColor.Blue;
-            Console.WriteLine(flights is IArrivalFlight[] ? new string('-', tableArrivalLine) : new string('-', tableDepartureLine));
+            Console.ForegroundColor = flights[0] is IArrivalFlight ? ConsoleColor.Cyan : ConsoleColor.Blue;
+            Console.WriteLine(flights[0] is IArrivalFlight ? new string('-', tableArrivalLine) : new string('-', tableDepartureLine));
             if (type)
             {
-                Console.WriteLine(flights is IArrivalFlight[] ? $"{"ВЫЛЕТЫ САМОЛЕТОВ",60}" : $"{"ПРИЛЁТЫ САМОЛЕТОВ",60}");
+                Console.WriteLine(flights[0] is IArrivalFlight ? $"{"ВЫЛЕТЫ САМОЛЕТОВ",60}" : $"{"ПРИЛЁТЫ САМОЛЕТОВ",60}");
             }
             else
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine(flights is IArrivalFlight[] ? $"{"ВЫЛЕТЫ САМОЛЕТОВ - РЕДАКТИРОВАНИЕ",60}" : $"{"ПРИЛЁТЫ САМОЛЕТОВ - РЕДАКТИРОВАНИЕ",60}");
-                Console.ForegroundColor = flights is IArrivalFlight[] ? ConsoleColor.Cyan : ConsoleColor.Blue;
+                Console.WriteLine(flights[0] is IArrivalFlight ? $"{"ВЫЛЕТЫ САМОЛЕТОВ - РЕДАКТИРОВАНИЕ",60}" : $"{"ПРИЛЁТЫ САМОЛЕТОВ - РЕДАКТИРОВАНИЕ",60}");
+                Console.ForegroundColor = flights[0] is IArrivalFlight ? ConsoleColor.Cyan : ConsoleColor.Blue;
             }
-            Console.WriteLine(flights is IArrivalFlight[] ? new string('-', tableArrivalLine) : new string('-', tableDepartureLine));
+            Console.WriteLine(flights[0] is IArrivalFlight ? new string('-', tableArrivalLine) : new string('-', tableDepartureLine));
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write(
-                $"{"Рейс".PadRight((int)Columns.colFlightNumber,' ')}" +
+                $"{"Рейс".PadRight((int)Columns.colFlightNumber, ' ')}" +
                 $"{"Время".PadRight((int)Columns.colDateTime, ' ')}" +
                 $"{"Назначение".PadRight((int)Columns.colCityPort, ' ')}" +
                 $"{"Перевозчик".PadRight((int)Columns.colAirline, ' ')}" +
                 $"{"Терминал".PadRight((int)Columns.colTerminal, ' ')}"
                 );
-            Console.WriteLine(flights is IArrivalFlight[] ? $"{"Гейт".PadRight((int)Columns.colGate, ' ')}{"Статус".PadRight((int)Columns.colFlightStatus, ' ')}" : $"{"Статус".PadRight((int)Columns.colDevFlightStatus, ' ')}");
+            Console.WriteLine(flights[0] is IArrivalFlight ? $"{"Гейт".PadRight((int)Columns.colGate, ' ')}{"Статус".PadRight((int)Columns.colFlightStatus, ' ')}" : $"{"Статус".PadRight((int)Columns.colDevFlightStatus, ' ')}");
             Console.ResetColor();
 
             BubbleSort(flights); // сортировка по времени
@@ -78,23 +78,23 @@ namespace AirlineInfo
             foreach (var item in flights)
                 item.Show();
 
-            Console.WriteLine(flights is IArrivalFlight[] ? new string('-', tableArrivalLine) : new string('-', tableDepartureLine));
+            Console.WriteLine(flights[0] is IArrivalFlight ? new string('-', tableArrivalLine) : new string('-', tableDepartureLine));
             Console.WriteLine();
         }
 
         // редактирование табла ВЫЛЕТ-ов/ПРИЛЁТ-ов
-        public static void DisplayEditTable(IFlight[] flights)
+        public static void DisplayEditTable(Flight[] flights)
         {
             string menuSelect = String.Empty;
 
             while (menuSelect != "0")
             {
-                    DisplayFlightsTable(flights, false);
+                DisplayFlightsTable(flights, false);
                 try
                 {
                     Console.Write(flights is IArrivalFlight[] ? $"Выберите номер рейса (0-{Data.maxArrivalFlight - 1}) :" : $"Выберите номер рейса (0-{Data.maxDepartureFlight - 1}) :");
                     int selectType = int.Parse(Console.ReadLine());
-                    Console.WriteLine(flights is IArrivalFlight[] ? $"Был выбран {selectType} рейс: {Data.arrivalFlights[selectType].FlightNumber}" : $"Был выбран {selectType} рейс: {Data.departureFlights[selectType].FlightNumber}");
+                    Console.WriteLine($"Был выбран {selectType} рейс: {flights[selectType].FlightNumber}");
 
                     DisplayEditMenu();
                     menuSelect = Console.ReadLine().ToLower();
@@ -102,7 +102,7 @@ namespace AirlineInfo
                     switch (menuSelect)
                     {
                         case "1": // НОМЕР РЕЙСА
-                            
+
                             Console.SetCursorPosition(0, selectType + 4);
                             flights[selectType].Edit(Columns.colFlightNumber, selectType);
                             break;
@@ -145,34 +145,21 @@ namespace AirlineInfo
             }
         }
 
-        // сортировка пузырьком - МЕГА ГОВНОКОД
-        private static void BubbleSort(IFlight[] flights)
+        // сортировка пузырьком
+        private static void BubbleSort(Flight[] flights)
         {
-            IFlight tmpFlight = null;
+            Flight tmpFlight = null;
 
             for (int i = 0; i < flights.Length - 1; i++)
             {
                 for (int j = 0; j < flights.Length - 1 - i; j++)
                 {
-                    if ((flights is IArrivalFlight[]))
+                    if (flights[j].DateTime > flights[j + 1].DateTime)
                     {
-                        if (Data.arrivalFlights[j].DateTime > Data.arrivalFlights[j + 1].DateTime)
-                        {
-                            tmpFlight = flights[j + 1];
-                            flights[j + 1] = flights[j];
-                            flights[j] = tmpFlight;
-                        }
+                        tmpFlight = flights[j + 1];
+                        flights[j + 1] = flights[j];
+                        flights[j] = tmpFlight;
                     }
-                    else
-                    {
-                        if (Data.departureFlights[j].DateTime > Data.departureFlights[j + 1].DateTime)
-                        {
-                            tmpFlight = flights[j + 1];
-                            flights[j + 1] = flights[j];
-                            flights[j] = tmpFlight;
-                        }
-                    }
-
                 }
             }
         }
