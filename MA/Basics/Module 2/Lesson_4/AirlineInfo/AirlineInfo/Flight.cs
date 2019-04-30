@@ -56,17 +56,6 @@ namespace AirlineInfo
             Gate = Data.gate[random.Next(Data.gate.Count)];
             FlightStatus = (FlightStatus)random.Next(Enum.GetNames(typeof(FlightStatus)).Length);
         }
-
-        public Flight(DateTime dateTime, string flightNumber, string cityPort, string airline, string terminal, string gate, FlightStatus flightStatus)
-        {
-            DateTime = dateTime;
-            FlightNumber = flightNumber;
-            CityPort = cityPort;
-            Airline = airline;
-            Terminal = terminal;
-            Gate = gate;
-            FlightStatus = flightStatus;
-        }
         #endregion
 
         #region methods
