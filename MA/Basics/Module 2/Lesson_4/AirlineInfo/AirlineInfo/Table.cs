@@ -15,9 +15,12 @@ namespace AirlineInfo
             Console.WriteLine($"1 - вылеты самолетов");
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine($"2 - прилеты самолетов");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"3 - пассажиры");
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine($"3 - редактирование вылетов самолетов");
-            Console.WriteLine($"4 - редактирование прилетов самолетов");
+            Console.WriteLine($"4 - редактирование вылетов самолетов");
+            Console.WriteLine($"5 - редактирование прилетов самолетов");
+            Console.WriteLine($"6 - редактирование пассажиров");
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"0 - выход");
             Console.ResetColor();
@@ -75,6 +78,15 @@ namespace AirlineInfo
                 item.Show();
 
             Console.WriteLine(flights[0] is IArrivalFlight ? new string('-', tableArrivalLine) : new string('-', tableDepartureLine));
+            Console.WriteLine();
+        }
+
+        // отображение табло пассажиров
+        public static void DisplayPassengersTable(Passenger[] passengers)
+        {
+            Console.Clear();
+            foreach (var item in passengers)
+                item.Show();
             Console.WriteLine();
         }
 

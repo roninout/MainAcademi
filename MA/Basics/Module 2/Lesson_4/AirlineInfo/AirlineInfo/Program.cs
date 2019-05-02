@@ -12,9 +12,11 @@ namespace AirlineInfo
         {
             Data.maxArrivalFlight = 5;
             Data.maxDepartureFlight = 8;
+            Data.maxPassengers = 10;
 
             Flight[] arrivalFlights = Data.InitArrivalFlight();
             Flight[] departureFlights = Data.InitDepartureFlight();
+            Passenger[] passengers = Data.InitPassengers();
 
             string menuSelect = String.Empty;
 
@@ -32,11 +34,17 @@ namespace AirlineInfo
                         Table.DisplayFlightsTable(departureFlights);
                         break;
                     case "3":
-                        Table.DisplayEditTable(arrivalFlights);
+                        Table.DisplayPassengersTable(passengers);
                         break;
                     case "4":
+                        Table.DisplayEditTable(arrivalFlights);
+                        break;
+                    case "5":
                         Table.DisplayEditTable(departureFlights);
                         break;
+                    //case "6":
+                    //    Table.DisplayEditPassengersTable();
+                    //    break;
                     case "0":
                         break;
                     default:
