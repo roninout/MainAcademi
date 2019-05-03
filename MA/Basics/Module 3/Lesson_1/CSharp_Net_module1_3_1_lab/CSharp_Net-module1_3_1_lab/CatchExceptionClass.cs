@@ -20,20 +20,25 @@ namespace CSharp_Net_module1_3_1_lab
                 ma.Assign(arr, 4);
 
             }
-           
-                // 8) catch all other exceptions here
-            catch
+
+            // 8) catch all other exceptions here
+            catch (Exception ex)
             {
                 // 9) print System.Exception properties:
                 // HelpLink, Message, Source, StackTrace, TargetSite
+                Console.WriteLine("Exception: " + ex.GetType().FullName);
+                Console.WriteLine("HelpLink: " + ex.HelpLink);
+                Console.WriteLine("Message: " + ex.Message);
+                Console.WriteLine("Source: " + ex.Source);
+                Console.WriteLine("StackTrace: " + ex.StackTrace);
+                Console.WriteLine("TargetSite: " + ex.TargetSite);
 
             }
-
             // 10) add finally block, print some message
             // explain features of block finally
             finally
             {
-
+                Console.WriteLine("Finally");
             }
         }
     }

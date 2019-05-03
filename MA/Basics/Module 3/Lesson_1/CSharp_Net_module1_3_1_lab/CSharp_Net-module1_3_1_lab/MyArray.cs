@@ -13,7 +13,7 @@ namespace CSharp_Net_module1_3_1_lab
         public void Assign(int []arr, int size)
         {
             // 5) add block try (outside of existing block try)
-            //try
+            try
             {
                 try
                 {
@@ -21,13 +21,20 @@ namespace CSharp_Net_module1_3_1_lab
 
                     // 1) assign some value to cell of array arr, which index is out of range
 
+                    arr[1] = 0;
+                    var element = arr[arr.Length + 1];
+
+
+                    if (size > arr.Length)
+                        throw new IndexOutOfRangeException();
+
                     for (int i = 0; i < arr.Length; i++)
                         this.arr[i] = arr[i] / arr[i + 1];
 
 
                     // 7) use unchecked to assign result of operation 1000000000 * 100 
                     // to last cell of array
-
+                    unchecked { arr[arr.Length] = 1000000000 * 100; }
 
                     //NullReferenceException
 
@@ -35,20 +42,22 @@ namespace CSharp_Net_module1_3_1_lab
                 // 2) catch exception index out of rage
                 catch 
                 {
+
                     // output message 
                 }
             }
             // 4) catch devision by 0 exception
-            //catch
+            catch (DivideByZeroException)
             {
-                // output message 
+                // output message
+                Console.WriteLine("Divide By Zero Exception");
             }
 
             // 6) add catch block for null reference exception of outside block try  
             // change the code to execute this block (any method of any class)
-            //catch 
+            catch (NullReferenceException)
             {
-               
+                Console.WriteLine("Null Reference Exception");
             }
         }
     }

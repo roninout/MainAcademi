@@ -12,7 +12,9 @@ namespace CSharp_Net_module1_3_1_lab
 
             // 11) Make some unhandled exception and study Visual Studio debugger report – 
             // read description and find the reason of exception
-            
+
+            MyArray array = new MyArray();
+            //array.Assign(array, array.Le);
 
         }
     }
