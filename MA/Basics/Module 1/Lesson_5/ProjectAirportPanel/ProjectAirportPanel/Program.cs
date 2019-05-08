@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -83,7 +84,7 @@ namespace ProjectAirportPanel
             Console.ResetColor();
             foreach (var item in flight)
             {
-                Console.WriteLine($"{item.flightNumber,-10}{item.dateTime:dd:MM:yy hh:mm}{item.cityPort,18}{item.airline,35}{item.terminal,10}{item.gate,10}{item.flightStatus,12}");
+                Console.WriteLine($"{item.flightNumber,-10}{item.dateTime:HH:mm:ss}{item.cityPort,18}{item.airline,35}{item.terminal,10}{item.gate,10}{item.flightStatus,12}");
             }
             Console.WriteLine(new string('-', 110));
             Console.WriteLine();
@@ -102,7 +103,7 @@ namespace ProjectAirportPanel
             Console.ResetColor();
             foreach (var item in flight)
             {
-                Console.WriteLine($"{item.flightNumber,-10}{item.dateTime:dd:MM:yy hh:mm}{item.cityPort,18}{item.airline,35}{item.terminal,10}{item.flightStatus,22}");
+                Console.WriteLine($"{item.flightNumber,-10}{item.dateTime:HH:mm:ss}{item.cityPort,18}{item.airline,35}{item.terminal,10}{item.flightStatus,22}");
             }
             Console.WriteLine(new string('-', 110));
             Console.WriteLine();
@@ -133,7 +134,8 @@ namespace ProjectAirportPanel
                     {
                         case "1": // ВРЕМЯ
                             Console.Write($"Измените пункт ВРЕМЯ { flights[selectType].dateTime} на : ");
-                            flights[selectType].dateTime = DateTime.Parse(Console.ReadLine());
+                            //flights[selectType].dateTime = DateTime.Parse(Console.ReadLine());
+                            flights[selectType].dateTime = DateTime.ParseExact(Console.ReadLine() + ":00", "HH:mm:ss", CultureInfo.InvariantCulture);
                             Console.WriteLine($"ВРЕМЯ было изменено на: { flights[selectType].dateTime}.\nДля продолжения нажмите...");
                             Console.ReadKey();
                             Console.Clear();

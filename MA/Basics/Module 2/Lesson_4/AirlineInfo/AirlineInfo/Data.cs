@@ -58,19 +58,19 @@ namespace AirlineInfo
             return flights;
         }
 
-        public static Passenger[] InitPassengers()
+        public static List<Passenger> InitPassengers()
         {
-            Passenger[] passengers = new Passenger[maxPassengers];
+            var passengers = new List<Passenger>();
             for (int i = 0; i < maxPassengers; i++)
-                passengers[i] = new Passenger();
+                passengers.Add(new Passenger());
             return passengers;
         }
         #endregion
 
-        public static Func<DateTime> RandomDayFunc()
+        public static Func<DateTime> RandomDayFunc(Random gen)
         {
             DateTime start = new DateTime(1960, 1, 1);
-            Random gen = new Random();
+            //Random gen = new Random();
             int range = ((TimeSpan)(DateTime.Today - start)).Days;
             return () => start.AddDays(gen.Next(range));
         }

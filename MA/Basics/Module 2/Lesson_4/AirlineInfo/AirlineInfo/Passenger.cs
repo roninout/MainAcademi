@@ -15,13 +15,14 @@ namespace AirlineInfo
         public DateTime DateOfBirthday { get; set; }
         public Sex Sex { get; set; }
         public FlyClass FlyClass { get; set; }
+        public string FlightNumber { get; set; }
 
         protected static Random random = new Random();
 
         public Passenger()
         {
             Sex = (Sex)random.Next(Enum.GetNames(typeof(Sex)).Length);
-            if (Sex == Sex.Man)
+            if (Sex == Sex.Male)
             {
                 FirstName = Data.firstNameMale[random.Next(Data.firstNameMale.Count)];
                 SecondName = Data.secondNameMale[random.Next(Data.secondNameMale.Count)];
@@ -33,15 +34,16 @@ namespace AirlineInfo
             }
             Nationality = Data.nationality[random.Next(Data.nationality.Count)];
             Passport = Data.passportId[random.Next(Data.passportId.Count)];
-            DateOfBirthday = Data.RandomDayFunc()();
+            DateOfBirthday = Data.RandomDayFunc(random)();
             FlyClass = (FlyClass)random.Next(Enum.GetNames(typeof(FlyClass)).Length);
+            FlightNumber = Data.flightNumber[random.Next(Data.flightNumber.Count)];
         }
 
         // отображение
         public void Show()
         {
             Console.WriteLine(new string('-', 30));
-            Console.ForegroundColor = Sex == Sex.Man ? ConsoleColor.Blue : ConsoleColor.Magenta;
+            Console.ForegroundColor = Sex == Sex.Male ? ConsoleColor.Blue : ConsoleColor.Magenta;
             Console.WriteLine($"Sex:            {Sex}");
             Console.ResetColor();
             Console.WriteLine(new string('-', 30));
@@ -49,7 +51,8 @@ namespace AirlineInfo
             Console.WriteLine($"Second Name:    {SecondName}");
             Console.WriteLine($"Nationality:    {Nationality}");
             Console.WriteLine($"Passport:       {Passport}");
-            Console.WriteLine($"DateOfBirthday: {DateOfBirthday}");
+            Console.WriteLine($"DateOfBirthday: {DateOfBirthday:d}");
+            Console.WriteLine($"FlightNumber:   {FlightNumber}");
             Console.WriteLine($"FlyClass:       {FlyClass}");
             Console.WriteLine(new string('-', 30));
         }
@@ -58,8 +61,8 @@ namespace AirlineInfo
 
     enum Sex
     {
-        Man,
-        Woman
+        Male,
+        Female
     }
 
     enum FlyClass

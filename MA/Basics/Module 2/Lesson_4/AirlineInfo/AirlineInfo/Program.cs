@@ -11,12 +11,12 @@ namespace AirlineInfo
         static void Main(string[] args)
         {
             Data.maxArrivalFlight = 5;
-            Data.maxDepartureFlight = 8;
+            Data.maxDepartureFlight = 10;
             Data.maxPassengers = 10;
 
             Flight[] arrivalFlights = Data.InitArrivalFlight();
             Flight[] departureFlights = Data.InitDepartureFlight();
-            Passenger[] passengers = Data.InitPassengers();
+            List<Passenger> passengers = Data.InitPassengers();
 
             string menuSelect = String.Empty;
 

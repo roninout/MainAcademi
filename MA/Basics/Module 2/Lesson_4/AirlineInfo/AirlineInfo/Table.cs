@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace AirlineInfo
 {
@@ -82,7 +83,7 @@ namespace AirlineInfo
         }
 
         // отображение табло пассажиров
-        public static void DisplayPassengersTable(Passenger[] passengers)
+        public static void DisplayPassengersTable(List<Passenger> passengers)
         {
             Console.Clear();
             foreach (var item in passengers)
