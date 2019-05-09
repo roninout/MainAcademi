@@ -42,9 +42,9 @@ namespace AirlineInfo
                     case "5":
                         Table.DisplayEditTable(departureFlights);
                         break;
-                    //case "6":
-                    //    Table.DisplayEditPassengersTable();
-                    //    break;
+                    case "6":
+                        Table.DisplayAllPassengersTable(passengers);
+                        break;
                     case "0":
                         break;
                     default:

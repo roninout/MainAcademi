@@ -83,6 +83,24 @@ namespace AirlineInfo
         }
 
         // отображение табло пассажиров
+        public static void DisplayAllPassengersTable(List<Passenger> passengers)
+        {
+            int linesize = 47;
+
+            Console.Clear();
+            Console.WriteLine(new string('-', linesize));
+            Console.Write(
+                $"{"FirstName".PadRight((int)Columns.colFirstName, ' ')}" +
+                $"{"SecondName".PadRight((int)Columns.colSecondName, ' ')}" +
+                $"{"Sex".PadRight((int)Columns.colSex, ' ')}\n"
+                );
+            Console.WriteLine(new string('-', linesize));
+            foreach (var passenger in passengers)
+                passenger.ShowPassengersNames();
+            Console.WriteLine(new string('-', linesize));
+        }
+
+        // отображение табло пассажиров
         public static void DisplayPassengersTable(List<Passenger> passengers)
         {
             Console.Clear();

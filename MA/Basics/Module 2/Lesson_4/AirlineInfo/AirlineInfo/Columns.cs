@@ -15,6 +15,9 @@ namespace AirlineInfo
         colTerminal=13,
         colGate=8,
         colFlightStatus=15,
-        colDevFlightStatus = 15
+        colDevFlightStatus = 15,
+        colFirstName = 20,
+        colSecondName = 20,
+        colSex = 20
     }
 }

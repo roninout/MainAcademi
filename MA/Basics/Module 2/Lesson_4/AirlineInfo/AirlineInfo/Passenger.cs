@@ -57,6 +57,17 @@ namespace AirlineInfo
             Console.WriteLine(new string('-', 30));
         }
 
+        public void ShowPassengersNames()
+        {
+            Console.Write(
+                $"{FirstName.PadRight((int)Columns.colFirstName, ' ')}" +
+                $"{SecondName.PadRight((int)Columns.colSecondName, ' ')}"
+                );
+            Console.ForegroundColor = Sex == Sex.Male ? ConsoleColor.Blue : ConsoleColor.Magenta;
+            Console.Write($"{Sex.ToString().PadRight((int)Columns.colSex, ' ')}\n");
+            Console.ResetColor();
+        }
+
     }
 
     enum Sex
