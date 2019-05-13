@@ -16,6 +16,9 @@ namespace AirlineInfo
         public Sex Sex { get; set; }
         public FlyClass FlyClass { get; set; }
         public string FlightNumber { get; set; }
+        public string Price { get; set; }
+        public string ArrivalPort { get; set; }
+        public string DeparturePort { get; set; }
 
         protected static Random random = new Random();
 
@@ -101,14 +104,6 @@ namespace AirlineInfo
             Console.WriteLine("|");
         }
 
-        // редактирование пользователя
-        public void Edit(int index)
-        {
-            int linesize = (int)Columns.colNumb + (int)Columns.colFirstName + (int)Columns.colSecondName + (int)Columns.colSex + 27;
-
-            Console.SetCursorPosition(linesize, index);
-            Console.ReadLine();
-        }
     }
 
     enum Sex

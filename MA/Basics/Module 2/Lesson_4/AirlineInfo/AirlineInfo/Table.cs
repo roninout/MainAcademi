@@ -46,44 +46,57 @@ namespace AirlineInfo
         }
 
         // отображаем основное меню
-        public static void DisplayPassengerMenu(List<Passenger> passengers)
+        public static void DisplayPassengerMenu(PassengerCreator creator)
         {
             string menuSelect = "1";
+            int index = 1;
 
             while (menuSelect != "exit")
             {
                 try
                 {
+                    index = int.Parse(menuSelect);
                     // отображаем таблицу с именами всех пассажиров
-                    DisplayAllPassengersTable(passengers, int.Parse(menuSelect));
+                    DisplayAllPassengersTable(creator.Passengers, index);
                     // отображаем информацию о пассажире по индексу
-                    passengers[int.Parse(menuSelect) - 1].Show();
+                    creator.GetPassenger(index.ToString()).Show();
 
-                    Console.SetCursorPosition(0, passengers.Count + 5);
+                    Console.SetCursorPosition(0, creator.Passengers.Count + 5);
                     Console.WriteLine($"Меню выбора пассажиров:");
                     Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"add  - добавление нового пассажира");
                     Console.WriteLine($"edit - редактирование пассажира");
+                    Console.WriteLine($"del  - удаление пассажира");
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine($"exit - выход в главное меню");
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine();
-                    Console.Write($"Dведите номер пользователя из таблицы: ");
+                    Console.Write($"Введите номер пользователя из таблицы: ");
                     Console.ResetColor();
                     menuSelect = Console.ReadLine().ToLower();
 
+                }
+                catch (Exception)
+                {
                     switch (menuSelect)
                     {
                         case "exit": // выход в главное меню
                             return;
+                        case "add": // добавление пассажира
+                            creator.AddPassenger();
+                            menuSelect = (index + 1).ToString();
+                            break;
                         case "edit": // редактирование пассажира
-                            passengers[0].Edit(3);
+                            creator.EditPassenger(index.ToString());
+                            break;
+                        case "del": // удаление пассажира
+                            creator.DelPassenger(index.ToString());
+                            menuSelect = "1";
                             break;
                         default:
                             break;
                     }
-                }
-                catch (Exception)
-                {
+                    menuSelect = index > 0 ? Math.Min(index, creator.Passengers.Count).ToString() : "1";
                 }
             }
         }

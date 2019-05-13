@@ -36,7 +36,7 @@ namespace AirlineInfo
                         Table.DisplayMainMenu();
                         break;
                     case "3":
-                        Table.DisplayPassengerMenu(passengerCreator.Passengers);
+                        Table.DisplayPassengerMenu(passengerCreator);
                         Console.Clear();
                         Table.DisplayMainMenu();
                         break;
@@ -50,7 +50,7 @@ namespace AirlineInfo
                         break;
                     case "6":
                         //Table.DisplayAllPassengersTable(passengers);
-                        Table.DisplayPassengerMenu(passengerCreator.Passengers);
+                        Table.DisplayPassengerMenu(passengerCreator);
                         break;
                     case "0":
                         break;
