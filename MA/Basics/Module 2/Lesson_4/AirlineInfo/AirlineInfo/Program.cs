@@ -16,34 +16,41 @@ namespace AirlineInfo
 
             Flight[] arrivalFlights = Data.InitArrivalFlight();
             Flight[] departureFlights = Data.InitDepartureFlight();
-            List<Passenger> passengers = Data.InitPassengers();
+            var passengerCreator = new PassengerCreator(10);
 
             string menuSelect = String.Empty;
 
+            Table.DisplayMainMenu();
             while (menuSelect != "0")
             {
-                Table.DisplayMainMenu();
                 menuSelect = Console.ReadLine().ToLower();
 
                 switch (menuSelect)
                 {
                     case "1":
                         Table.DisplayFlightsTable(arrivalFlights);
+                        Table.DisplayMainMenu();
                         break;
                     case "2":
                         Table.DisplayFlightsTable(departureFlights);
+                        Table.DisplayMainMenu();
                         break;
                     case "3":
-                        Table.DisplayPassengersTable(passengers);
+                        Table.DisplayPassengerMenu(passengerCreator.Passengers);
+                        Console.Clear();
+                        Table.DisplayMainMenu();
                         break;
                     case "4":
                         Table.DisplayEditTable(arrivalFlights);
+                        Table.DisplayMainMenu();
                         break;
                     case "5":
                         Table.DisplayEditTable(departureFlights);
+                        Table.DisplayMainMenu();
                         break;
                     case "6":
-                        Table.DisplayAllPassengersTable(passengers);
+                        //Table.DisplayAllPassengersTable(passengers);
+                        Table.DisplayPassengerMenu(passengerCreator.Passengers);
                         break;
                     case "0":
                         break;

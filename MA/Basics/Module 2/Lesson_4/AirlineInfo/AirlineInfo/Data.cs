@@ -57,14 +57,6 @@ namespace AirlineInfo
                 flights[i] = new DepartureFlight();
             return flights;
         }
-
-        public static List<Passenger> InitPassengers()
-        {
-            var passengers = new List<Passenger>();
-            for (int i = 0; i < maxPassengers; i++)
-                passengers.Add(new Passenger());
-            return passengers;
-        }
         #endregion
 
         public static Func<DateTime> RandomDayFunc(Random gen)

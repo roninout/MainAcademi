@@ -45,6 +45,50 @@ namespace AirlineInfo
             Console.ResetColor();
         }
 
+        // отображаем основное меню
+        public static void DisplayPassengerMenu(List<Passenger> passengers)
+        {
+            string menuSelect = "1";
+
+            while (menuSelect != "exit")
+            {
+                try
+                {
+                    // отображаем таблицу с именами всех пассажиров
+                    DisplayAllPassengersTable(passengers, int.Parse(menuSelect));
+                    // отображаем информацию о пассажире по индексу
+                    passengers[int.Parse(menuSelect) - 1].Show();
+
+                    Console.SetCursorPosition(0, passengers.Count + 5);
+                    Console.WriteLine($"Меню выбора пассажиров:");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"edit - редактирование пассажира");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"exit - выход в главное меню");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine();
+                    Console.Write($"Dведите номер пользователя из таблицы: ");
+                    Console.ResetColor();
+                    menuSelect = Console.ReadLine().ToLower();
+
+                    switch (menuSelect)
+                    {
+                        case "exit": // выход в главное меню
+                            return;
+                        case "edit": // редактирование пассажира
+                            passengers[0].Edit(3);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                catch (Exception)
+                {
+                }
+            }
+        }
+
+
         // отображение табло ВЫЛЕТ-ов / ПРИЛЁТ-ов
         public static void DisplayFlightsTable(Flight[] flights, bool type = true)
         {
@@ -82,31 +126,24 @@ namespace AirlineInfo
             Console.WriteLine();
         }
 
-        // отображение табло пассажиров
-        public static void DisplayAllPassengersTable(List<Passenger> passengers)
+        // отображение табло всех пассажиров
+        private static void DisplayAllPassengersTable(List<Passenger> passengers, int select = -1)
         {
-            int linesize = 47;
+            int linesize = (int)Columns.colNumb + (int)Columns.colFirstName + (int)Columns.colSecondName + (int)Columns.colSex + 1;
 
             Console.Clear();
             Console.WriteLine(new string('-', linesize));
             Console.Write(
+                $"{"№".PadRight((int)Columns.colNumb, ' ')}" +
                 $"{"FirstName".PadRight((int)Columns.colFirstName, ' ')}" +
                 $"{"SecondName".PadRight((int)Columns.colSecondName, ' ')}" +
-                $"{"Sex".PadRight((int)Columns.colSex, ' ')}\n"
+                $"{"Sex".PadRight((int)Columns.colSex, ' ')}|\n"
                 );
             Console.WriteLine(new string('-', linesize));
-            foreach (var passenger in passengers)
-                passenger.ShowPassengersNames();
-            Console.WriteLine(new string('-', linesize));
-        }
+            for (int i = 0; i < passengers.Count; i++)
+                passengers[i].ShowPassengersNames(i+1, select);
 
-        // отображение табло пассажиров
-        public static void DisplayPassengersTable(List<Passenger> passengers)
-        {
-            Console.Clear();
-            foreach (var item in passengers)
-                item.Show();
-            Console.WriteLine();
+            Console.WriteLine(new string('-', linesize));
         }
 
         // редактирование табла ВЫЛЕТ-ов/ПРИЛЁТ-ов

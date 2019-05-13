@@ -8,6 +8,7 @@ namespace AirlineInfo
 {
     public enum Columns
     {
+        colNumb = 3,
         colFlightNumber=11,
         colDateTime=10,
         colCityPort=18,
@@ -18,6 +19,6 @@ namespace AirlineInfo
         colDevFlightStatus = 15,
         colFirstName = 20,
         colSecondName = 20,
-        colSex = 20
+        colSex = 7
     }
 }
