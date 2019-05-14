@@ -21,6 +21,7 @@ namespace AirlineInfo.Tickets
         public Ticket()
         {
             //Passenger = PassengerCreator.Passengers[random.Next(PassengerCreator.Passengers.Count)];
+
             ArrivalFlight = FlightCreator.ArrivalFlights[random.Next(FlightCreator.ArrivalFlights.Count)];
             DepartureFlight = FlightCreator.DepartureFlights[random.Next(FlightCreator.DepartureFlights.Count)];
             FlyClass = (FlyClass)random.Next(Enum.GetNames(typeof(FlyClass)).Length);

@@ -242,16 +242,25 @@ namespace AirlineInfo
 
             while (menuSelect != "exit")
             {
-                index = int.Parse(menuSelect);
-                // отображаем таблицу с именами всех пассажиров
-                DisplayAllTicketsTable(TicketCreator.Tickets, index);
+                try
+                {
+                    index = int.Parse(menuSelect);
+                }
+                catch (Exception)
+                {
+                }
+                finally
+                {
+                    // отображаем таблицу с именами всех пассажиров
+                    DisplayAllTicketsTable(TicketCreator.Tickets, index);
 
-                Console.SetCursorPosition(0, TicketCreator.Tickets.Count + 5);
-                Console.WriteLine($"Меню выбора билетов:");
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine($"exit - выход в главное меню");
-                Console.ResetColor();
-                menuSelect = Console.ReadLine().ToLower();
+                    Console.SetCursorPosition(0, TicketCreator.Tickets.Count + 5);
+                    Console.WriteLine($"Меню выбора билетов:");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"exit - выход в главное меню");
+                    Console.ResetColor();
+                    menuSelect = Console.ReadLine().ToLower();
+                }
             }
         }
 

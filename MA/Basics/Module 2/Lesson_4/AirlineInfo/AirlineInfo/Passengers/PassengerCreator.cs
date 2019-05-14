@@ -15,7 +15,7 @@ namespace AirlineInfo
         {
             MaxPassengers = maxPassengers;
             InitPassengers();
-            //Tickets.TicketCreator.AddPassengersToTickets();
+            Tickets.TicketCreator.AddPassengersToTickets(); // наполняем билеты пассажирами
         }
 
         // наполняем List пользователями

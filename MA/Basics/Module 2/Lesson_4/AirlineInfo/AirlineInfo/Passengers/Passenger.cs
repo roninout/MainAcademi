@@ -1,4 +1,5 @@
-﻿using AirlineInfo.Tickets;
+﻿using AirlineInfo.Flights;
+using AirlineInfo.Tickets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,21 +27,27 @@ namespace AirlineInfo
         public Passenger()
         {
             Sex = (Sex)random.Next(Enum.GetNames(typeof(Sex)).Length);
-            if (Sex == Sex.Male)
+            switch (Sex)
             {
-                FirstName = Data.firstNameMale[random.Next(Data.firstNameMale.Count)];
-                SecondName = Data.secondNameMale[random.Next(Data.secondNameMale.Count)];
-            }
-            else
-            {
-                FirstName = Data.firstNameFemale[random.Next(Data.firstNameFemale.Count)];
-                SecondName = Data.secondNameFemale[random.Next(Data.secondNameFemale.Count)];
+                case Sex.Male:
+                    FirstName = Data.firstNameMale[random.Next(Data.firstNameMale.Count)];
+                    SecondName = Data.secondNameMale[random.Next(Data.secondNameMale.Count)];
+                    break;
+                case Sex.Female:
+                    FirstName = Data.firstNameFemale[random.Next(Data.firstNameFemale.Count)];
+                    SecondName = Data.secondNameFemale[random.Next(Data.secondNameFemale.Count)];
+                    break;
+                default:
+                    break;
             }
             Nationality = Data.nationality[random.Next(Data.nationality.Count)];
             Passport = Data.passportId[random.Next(Data.passportId.Count)];
             DateOfBirthday = Data.RandomDayFunc(random)();
             FlyClass = (FlyClass)random.Next(Enum.GetNames(typeof(FlyClass)).Length);
-            FlightNumber = Flights.FlightCreator.ArrivalFlights[0]. Data.flightNumber[random.Next(Data.flightNumber.Count)];
+
+            var flightNumber = (from item in FlightCreator.ArrivalFlights select item.FlightNumber).ToList();
+            FlightNumber = flightNumber[random.Next(flightNumber.Count)];
+
             ArrivalPort = GetTicket().ArrivalFlight.CityPort;
             DeparturePort = GetTicket().DepartureFlight.CityPort;
             Price = GetTicket().Price.ToString();
