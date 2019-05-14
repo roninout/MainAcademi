@@ -21,7 +21,7 @@ namespace AirlineInfo
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"4 - редактирование вылетов самолетов");
             Console.WriteLine($"5 - редактирование прилетов самолетов");
-            Console.WriteLine($"6 - редактирование пассажиров");
+            Console.WriteLine($"6 - былеты");
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"0 - выход");
             Console.ResetColor();
@@ -64,6 +64,7 @@ namespace AirlineInfo
                     Console.SetCursorPosition(0, creator.Passengers.Count + 5);
                     Console.WriteLine($"Меню выбора пассажиров:");
                     Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"find - поиск пассажира");
                     Console.WriteLine($"add  - добавление нового пассажира");
                     Console.WriteLine($"edit - редактирование пассажира");
                     Console.WriteLine($"del  - удаление пассажира");
@@ -82,6 +83,9 @@ namespace AirlineInfo
                     {
                         case "exit": // выход в главное меню
                             return;
+                        case "find": // поиск пассажира
+                            index = creator.FindPassenger() + 1;
+                            break;
                         case "add": // добавление пассажира
                             creator.AddPassenger();
                             menuSelect = (index + 1).ToString();

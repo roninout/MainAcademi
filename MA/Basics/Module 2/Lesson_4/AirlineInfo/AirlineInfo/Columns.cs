@@ -19,6 +19,7 @@ namespace AirlineInfo
         colDevFlightStatus = 15,
         colFirstName = 20,
         colSecondName = 20,
-        colSex = 7
+        colSex = 7,
+        colPrice = 10
     }
 }

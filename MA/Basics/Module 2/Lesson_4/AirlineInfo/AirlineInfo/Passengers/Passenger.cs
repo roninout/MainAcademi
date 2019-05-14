@@ -20,6 +20,8 @@ namespace AirlineInfo
         public string ArrivalPort { get; set; }
         public string DeparturePort { get; set; }
 
+        private ArrivalFlight arrivalFlight;
+
         protected static Random random = new Random();
 
         public Passenger()

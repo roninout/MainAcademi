@@ -17,6 +17,7 @@ namespace AirlineInfo
             InitPassengers();
         }
 
+        // наполняем List пользователями
         private List<Passenger> InitPassengers()
         {
             Passengers = new List<Passenger>(MaxPassengers);
@@ -25,6 +26,65 @@ namespace AirlineInfo
             return Passengers;
         }
 
+        // поиск пассажира
+        public int FindPassenger()
+        {
+            int linesize = (int)Columns.colNumb + (int)Columns.colFirstName + (int)Columns.colSecondName + (int)Columns.colSex + 27;
+            Passenger passenger = null;
+            
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.SetCursorPosition(linesize - 17, 12);
+            Console.WriteLine($"Поиск пассажира:");
+            Console.ResetColor();
+            Console.SetCursorPosition(linesize - 17, 13);
+            Console.WriteLine($"1 - имя:");
+            Console.SetCursorPosition(linesize - 17, 14);
+            Console.WriteLine($"2 - фамилия:");
+            Console.SetCursorPosition(linesize - 17, 15);
+            Console.WriteLine($"3 - номер рейса:");
+            Console.SetCursorPosition(linesize - 17, 16);
+            Console.WriteLine($"4 - по цене:");
+            Console.SetCursorPosition(linesize - 17, 17);
+            Console.WriteLine($"5 - паспорт:");
+            Console.SetCursorPosition(linesize - 17, 18);
+            Console.WriteLine($"6 - arrival port:");
+            Console.SetCursorPosition(linesize - 17, 19);
+            Console.WriteLine($"7 - departure port:");
+            Console.SetCursorPosition(linesize - 17, 21);
+            string select = Console.ReadLine();
+            Console.SetCursorPosition(linesize - 17, 22);
+            Console.WriteLine($"Введите запрос: ");
+            Console.SetCursorPosition(linesize - 17, 23);
+            string param = Console.ReadLine();
+
+            switch (select)
+            {
+                case "1":
+                    passenger = GetPassenger(param, FindTypes.FirstName);
+                    break;
+                case "2":
+                    passenger = GetPassenger(param, FindTypes.SecondName);
+                    break;
+                case "3":
+                    passenger = GetPassenger(param, FindTypes.FlightNumber);
+                    break;
+                case "4":
+                    passenger = GetPassenger(param, FindTypes.Price);
+                    break;
+                case "5":
+                    passenger = GetPassenger(param, FindTypes.Passport);
+                    break;
+                case "6":
+                    passenger = GetPassenger(param, FindTypes.ArrivalPort);
+                    break;
+                case "7":
+                    passenger = GetPassenger(param, FindTypes.DeparturePort);
+                    break;
+                default:
+                    break;
+            }
+            return Passengers.IndexOf(passenger);
+        }
 
         // добавление пассажира
         public void AddPassenger()
@@ -108,37 +168,37 @@ namespace AirlineInfo
                         return Passengers[int.Parse(param) - 1];
                     case FindTypes.FirstName:
                         var firstName = from passenger in Passengers
-                                        where passenger.FirstName == param
+                                        where passenger.FirstName.ToLower() == param.ToLower()
                                         select passenger;
                         return firstName.First();
                     case FindTypes.SecondName:
                         var secondName = from passenger in Passengers
-                                         where passenger.SecondName == param
+                                         where passenger.SecondName.ToLower() == param.ToLower()
                                          select passenger;
                         return secondName.First();
                     case FindTypes.FlightNumber:
                         var flightNumber = from passenger in Passengers
-                                           where passenger.FlightNumber == param
+                                           where passenger.FlightNumber.ToLower() == param.ToLower()
                                            select passenger;
                         return flightNumber.First();
                     case FindTypes.Price:
                         var price = from passenger in Passengers
-                                    where passenger.Price == param
+                                    where passenger.Price.ToLower() == param.ToLower()
                                     select passenger;
                         return price.First();
                     case FindTypes.Passport:
                         var passport = from passenger in Passengers
-                                       where passenger.Passport == param
+                                       where passenger.Passport.ToLower() == param.ToLower()
                                        select passenger;
                         return passport.First();
                     case FindTypes.ArrivalPort:
                         var arrivalPort = from passenger in Passengers
-                                          where passenger.ArrivalPort == param
+                                          where passenger.ArrivalPort.ToLower() == param.ToLower()
                                           select passenger;
                         return arrivalPort.First();
                     case FindTypes.DeparturePort:
                         var departurePort = from passenger in Passengers
-                                            where passenger.DeparturePort == param
+                                            where passenger.DeparturePort.ToLower() == param.ToLower()
                                             select passenger;
                         return departurePort.First();
                     default:
@@ -151,68 +211,6 @@ namespace AirlineInfo
             }
         }
 
-        public void SetPassenger(string param, FindTypes findTypes = FindTypes.Index)
-        {
-            Passenger passengerResult = null;
-            try
-            {
-                switch (findTypes)
-                {
-                    case FindTypes.Index:
-                        Passengers[int.Parse(param)] = null;
-                        break;
-                    case FindTypes.FirstName:
-                        var firstName = from passenger in Passengers
-                                        where passenger.FirstName == param
-                                        select passenger;
-                        passengerResult = firstName.First();
-                        break;
-                    case FindTypes.SecondName:
-                        var secondName = from passenger in Passengers
-                                         where passenger.SecondName == param
-                                         select passenger;
-                        passengerResult = secondName.First();
-                        break;
-                    case FindTypes.FlightNumber:
-                        var flightNumber = from passenger in Passengers
-                                           where passenger.FlightNumber == param
-                                           select passenger;
-                        passengerResult = flightNumber.First();
-                        break;
-                    case FindTypes.Price:
-                        var price = from passenger in Passengers
-                                    where passenger.Price == param
-                                    select passenger;
-                        passengerResult = price.First();
-                        break;
-                    case FindTypes.Passport:
-                        var passport = from passenger in Passengers
-                                       where passenger.Passport == param
-                                       select passenger;
-                        passengerResult = passport.First();
-                        break;
-                    case FindTypes.ArrivalPort:
-                        var arrivalPort = from passenger in Passengers
-                                          where passenger.ArrivalPort == param
-                                          select passenger;
-                        passengerResult = arrivalPort.First();
-                        break;
-                    case FindTypes.DeparturePort:
-                        var departurePort = from passenger in Passengers
-                                            where passenger.DeparturePort == param
-                                            select passenger;
-                        passengerResult = departurePort.First();
-                        break;
-                    default:
-                        passengerResult = null;
-                        break;
-                }
-            }
-            catch (Exception)
-            {
-                passengerResult = null;
-            }
-        }
         #endregion
     }
 }
