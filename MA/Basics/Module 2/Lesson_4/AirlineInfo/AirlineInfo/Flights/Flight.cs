@@ -2,7 +2,7 @@
 
 namespace AirlineInfo
 {
-    abstract class Flight
+    abstract class Flight : IComparable
     {
         #region properties
         protected static Random random = new Random();
@@ -60,6 +60,12 @@ namespace AirlineInfo
 
         // редактирование
         public abstract void Edit(Columns columns, int selectType);
+
+        // сортировка по времени
+        public int CompareTo(object obj)
+        {
+            return obj is Flight ? this.DateTime.CompareTo(((Flight)obj).DateTime) : -1;
+        }
 
 
         #endregion

@@ -8,9 +8,9 @@ namespace AirlineInfo
 {
     static class Data
     {
-        public static int maxArrivalFlight = 0;
-        public static int maxDepartureFlight = 0;
-        public static int maxPassengers = 0;
+        //public static int maxArrivalFlight = 0;
+        //public static int maxDepartureFlight = 0;
+        //public static int maxPassengers = 0;
 
         #region data Fly
         internal static List<string> flightNumber = new List<string>()
@@ -41,23 +41,23 @@ namespace AirlineInfo
 
         #endregion
 
-        #region init data
-        public static Flight[] InitArrivalFlight()
-        {
-            Flight[] flights = new Flight[maxArrivalFlight];
-            for (int i = 0; i < maxArrivalFlight; i++)
-                flights[i] = new ArrivalFlight();
-            return flights;
-        }
+        //#region init data
+        //public static Flight[] InitArrivalFlight()
+        //{
+        //    Flight[] flights = new Flight[maxArrivalFlight];
+        //    for (int i = 0; i < maxArrivalFlight; i++)
+        //        flights[i] = new ArrivalFlight();
+        //    return flights;
+        //}
 
-        public static Flight[] InitDepartureFlight()
-        {
-            Flight[] flights = new Flight[maxDepartureFlight];
-            for (int i = 0; i < maxDepartureFlight; i++)
-                flights[i] = new DepartureFlight();
-            return flights;
-        }
-        #endregion
+        //public static Flight[] InitDepartureFlight()
+        //{
+        //    Flight[] flights = new Flight[maxDepartureFlight];
+        //    for (int i = 0; i < maxDepartureFlight; i++)
+        //        flights[i] = new DepartureFlight();
+        //    return flights;
+        //}
+        //#endregion
 
         public static Func<DateTime> RandomDayFunc(Random gen)
         {

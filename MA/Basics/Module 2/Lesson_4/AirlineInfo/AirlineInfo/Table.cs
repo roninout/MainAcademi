@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AirlineInfo.Flights;
+using AirlineInfo.Tickets;
+using System;
 using System.Collections.Generic;
 
 namespace AirlineInfo
@@ -21,6 +23,7 @@ namespace AirlineInfo
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"4 - редактирование вылетов самолетов");
             Console.WriteLine($"5 - редактирование прилетов самолетов");
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"6 - былеты");
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"0 - выход");
@@ -45,69 +48,9 @@ namespace AirlineInfo
             Console.ResetColor();
         }
 
-        // отображаем основное меню
-        public static void DisplayPassengerMenu(PassengerCreator creator)
-        {
-            string menuSelect = "1";
-            int index = 1;
-
-            while (menuSelect != "exit")
-            {
-                try
-                {
-                    index = int.Parse(menuSelect);
-                    // отображаем таблицу с именами всех пассажиров
-                    DisplayAllPassengersTable(creator.Passengers, index);
-                    // отображаем информацию о пассажире по индексу
-                    creator.GetPassenger(index.ToString()).Show();
-
-                    Console.SetCursorPosition(0, creator.Passengers.Count + 5);
-                    Console.WriteLine($"Меню выбора пассажиров:");
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine($"find - поиск пассажира");
-                    Console.WriteLine($"add  - добавление нового пассажира");
-                    Console.WriteLine($"edit - редактирование пассажира");
-                    Console.WriteLine($"del  - удаление пассажира");
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine($"exit - выход в главное меню");
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine();
-                    Console.Write($"Введите номер пользователя из таблицы: ");
-                    Console.ResetColor();
-                    menuSelect = Console.ReadLine().ToLower();
-
-                }
-                catch (Exception)
-                {
-                    switch (menuSelect)
-                    {
-                        case "exit": // выход в главное меню
-                            return;
-                        case "find": // поиск пассажира
-                            index = creator.FindPassenger() + 1;
-                            break;
-                        case "add": // добавление пассажира
-                            creator.AddPassenger();
-                            menuSelect = (index + 1).ToString();
-                            break;
-                        case "edit": // редактирование пассажира
-                            creator.EditPassenger(index.ToString());
-                            break;
-                        case "del": // удаление пассажира
-                            creator.DelPassenger(index.ToString());
-                            menuSelect = "1";
-                            break;
-                        default:
-                            break;
-                    }
-                    menuSelect = index > 0 ? Math.Min(index, creator.Passengers.Count).ToString() : "1";
-                }
-            }
-        }
-
-
+        #region Flights
         // отображение табло ВЫЛЕТ-ов / ПРИЛЁТ-ов
-        public static void DisplayFlightsTable(Flight[] flights, bool type = true)
+        public static void DisplayFlightsTable(List<Flight> flights, bool type = true)
         {
             Console.Clear();
             Console.ForegroundColor = flights[0] is IArrivalFlight ? ConsoleColor.Cyan : ConsoleColor.Blue;
@@ -134,7 +77,7 @@ namespace AirlineInfo
             Console.WriteLine(flights[0] is IArrivalFlight ? $"{"Гейт".PadRight((int)Columns.colGate, ' ')}{"Статус".PadRight((int)Columns.colFlightStatus, ' ')}" : $"{"Статус".PadRight((int)Columns.colDevFlightStatus, ' ')}");
             Console.ResetColor();
 
-            BubbleSort(flights); // сортировка по времени
+            flights.Sort(); // сортировка
 
             foreach (var item in flights)
                 item.Show();
@@ -143,37 +86,17 @@ namespace AirlineInfo
             Console.WriteLine();
         }
 
-        // отображение табло всех пассажиров
-        private static void DisplayAllPassengersTable(List<Passenger> passengers, int select = -1)
-        {
-            int linesize = (int)Columns.colNumb + (int)Columns.colFirstName + (int)Columns.colSecondName + (int)Columns.colSex + 1;
-
-            Console.Clear();
-            Console.WriteLine(new string('-', linesize));
-            Console.Write(
-                $"{"№".PadRight((int)Columns.colNumb, ' ')}" +
-                $"{"FirstName".PadRight((int)Columns.colFirstName, ' ')}" +
-                $"{"SecondName".PadRight((int)Columns.colSecondName, ' ')}" +
-                $"{"Sex".PadRight((int)Columns.colSex, ' ')}|\n"
-                );
-            Console.WriteLine(new string('-', linesize));
-            for (int i = 0; i < passengers.Count; i++)
-                passengers[i].ShowPassengersNames(i+1, select);
-
-            Console.WriteLine(new string('-', linesize));
-        }
-
         // редактирование табла ВЫЛЕТ-ов/ПРИЛЁТ-ов
-        public static void DisplayEditTable(Flight[] flights)
+        public static void DisplayEditTable(List<Flight> flights)
         {
-            string menuSelect = String.Empty;
+            string menuSelect = string.Empty;
 
             while (menuSelect != "0")
             {
                 DisplayFlightsTable(flights, false);
                 try
                 {
-                    Console.Write(flights is IArrivalFlight[] ? $"Выберите номер рейса (0-{Data.maxArrivalFlight - 1}) :" : $"Выберите номер рейса (0-{Data.maxDepartureFlight - 1}) :");
+                    Console.Write(flights is IArrivalFlight ? $"Выберите номер рейса (0-{FlightCreator.MaxFlight - 1}) :" : $"Выберите номер рейса (0-{FlightCreator.MaxFlight - 1}) :");
                     int selectType = int.Parse(Console.ReadLine());
                     Console.WriteLine($"Был выбран {selectType} рейс: {flights[selectType].FlightNumber}");
 
@@ -225,6 +148,144 @@ namespace AirlineInfo
                 }
             }
         }
+
+        #endregion
+
+        #region Passengers
+        // отображаем основное меню пассажиров
+        public static void DisplayPassengerMenu(PassengerCreator creator)
+        {
+            string menuSelect = "1";
+            int index = 1;
+
+            while (menuSelect != "exit")
+            {
+                try
+                {
+                    index = int.Parse(menuSelect);
+                    // отображаем таблицу с именами всех пассажиров
+                    DisplayAllPassengersTable(PassengerCreator.Passengers, index);
+                    // отображаем информацию о пассажире по индексу
+                    creator.GetPassenger(index.ToString()).Show();
+
+                    Console.SetCursorPosition(0, PassengerCreator.Passengers.Count + 5);
+                    Console.WriteLine($"Меню выбора пассажиров:");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine($"find - поиск пассажира");
+                    Console.WriteLine($"add  - добавление нового пассажира");
+                    Console.WriteLine($"edit - редактирование пассажира");
+                    Console.WriteLine($"del  - удаление пассажира");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine($"exit - выход в главное меню");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine();
+                    Console.Write($"Введите номер пользователя из таблицы: ");
+                    Console.ResetColor();
+                    menuSelect = Console.ReadLine().ToLower();
+
+                }
+                catch (Exception)
+                {
+                    switch (menuSelect)
+                    {
+                        case "exit": // выход в главное меню
+                            return;
+                        case "find": // поиск пассажира
+                            index = creator.FindPassenger() + 1;
+                            break;
+                        case "add": // добавление пассажира
+                            creator.AddPassenger();
+                            menuSelect = (index + 1).ToString();
+                            break;
+                        case "edit": // редактирование пассажира
+                            creator.EditPassenger(index.ToString());
+                            break;
+                        case "del": // удаление пассажира
+                            creator.DelPassenger(index.ToString());
+                            menuSelect = "1";
+                            break;
+                        default:
+                            break;
+                    }
+                    menuSelect = index > 0 ? Math.Min(index, PassengerCreator.Passengers.Count).ToString() : "1";
+                }
+            }
+        }
+
+        // отображение табло всех пассажиров
+        private static void DisplayAllPassengersTable(List<Passenger> passengers, int select = -1)
+        {
+            int linesize = (int)Columns.colNumb + (int)Columns.colFirstName + (int)Columns.colSecondName + (int)Columns.colSex + 1;
+
+            Console.Clear();
+            Console.WriteLine(new string('-', linesize));
+            Console.Write(
+                $"{"№".PadRight((int)Columns.colNumb, ' ')}" +
+                $"{"FirstName".PadRight((int)Columns.colFirstName, ' ')}" +
+                $"{"SecondName".PadRight((int)Columns.colSecondName, ' ')}" +
+                $"{"Sex".PadRight((int)Columns.colSex, ' ')}|\n"
+                );
+            Console.WriteLine(new string('-', linesize));
+            for (int i = 0; i < passengers.Count; i++)
+                passengers[i].ShowPassengersNames(i + 1, select);
+
+            Console.WriteLine(new string('-', linesize));
+        }
+        #endregion
+
+        #region Tickets
+        // отображаем основное меню пассажиров
+        public static void DisplayTicketsMenu(TicketCreator creator)
+        {
+            string menuSelect = "1";
+            int index = 1;
+
+            while (menuSelect != "exit")
+            {
+                index = int.Parse(menuSelect);
+                // отображаем таблицу с именами всех пассажиров
+                DisplayAllTicketsTable(TicketCreator.Tickets, index);
+
+                Console.SetCursorPosition(0, TicketCreator.Tickets.Count + 5);
+                Console.WriteLine($"Меню выбора билетов:");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine($"exit - выход в главное меню");
+                Console.ResetColor();
+                menuSelect = Console.ReadLine().ToLower();
+            }
+        }
+
+        // отображение табло всех билетов
+        private static void DisplayAllTicketsTable(List<Ticket> tickets, int select = -1)
+        {
+            int linesize = (int)Columns.colNumb +
+                           (int)Columns.colFirstName + 
+                           (int)Columns.colSecondName + 
+                           (int)Columns.colCityPort*2 +
+                           (int)Columns.colFlightStatus +
+                           (int)Columns.colPrice + 1;
+
+            Console.Clear();
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(new string('-', linesize));
+            Console.Write(
+                $"{"№".PadRight((int)Columns.colNumb, ' ')}" +
+                $"{"FirstName".PadRight((int)Columns.colFirstName, ' ')}" +
+                $"{"SecondName".PadRight((int)Columns.colSecondName, ' ')}" +
+                $"{"ArrivalFlight".PadRight((int)Columns.colCityPort, ' ')}" +
+                $"{"DepartureFlight".PadRight((int)Columns.colCityPort, ' ')}" +
+                $"{"Fly Class".PadRight((int)Columns.colFlightStatus, ' ')}" +
+                $"{"Price".PadRight((int)Columns.colPrice, ' ')}|\n"
+                );
+            Console.WriteLine(new string('-', linesize));
+            Console.ResetColor();
+            for (int i = 0; i < tickets.Count; i++)
+                tickets[i].Show(i + 1, 1);
+
+            Console.WriteLine(new string('-', linesize));
+        }
+        #endregion
 
         // сортировка пузырьком
         private static void BubbleSort(Flight[] flights)

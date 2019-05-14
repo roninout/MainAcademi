@@ -8,13 +8,14 @@ namespace AirlineInfo
 {
     class PassengerCreator
     {
-        public List<Passenger> Passengers;
-        public int MaxPassengers { get; set; } = 0;
+        public static List<Passenger> Passengers;
+        public static int MaxPassengers { get; set; } = 0;
 
         public PassengerCreator(int maxPassengers)
         {
-            this.MaxPassengers = maxPassengers;
+            MaxPassengers = maxPassengers;
             InitPassengers();
+            //Tickets.TicketCreator.AddPassengersToTickets();
         }
 
         // наполняем List пользователями

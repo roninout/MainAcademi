@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AirlineInfo.Tickets;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,8 +21,6 @@ namespace AirlineInfo
         public string ArrivalPort { get; set; }
         public string DeparturePort { get; set; }
 
-        private ArrivalFlight arrivalFlight;
-
         protected static Random random = new Random();
 
         public Passenger()
@@ -41,7 +40,10 @@ namespace AirlineInfo
             Passport = Data.passportId[random.Next(Data.passportId.Count)];
             DateOfBirthday = Data.RandomDayFunc(random)();
             FlyClass = (FlyClass)random.Next(Enum.GetNames(typeof(FlyClass)).Length);
-            FlightNumber = Data.flightNumber[random.Next(Data.flightNumber.Count)];
+            FlightNumber = Flights.FlightCreator.ArrivalFlights[0]. Data.flightNumber[random.Next(Data.flightNumber.Count)];
+            ArrivalPort = GetTicket().ArrivalFlight.CityPort;
+            DeparturePort = GetTicket().DepartureFlight.CityPort;
+            Price = GetTicket().Price.ToString();
         }
 
         // отображение
@@ -104,6 +106,14 @@ namespace AirlineInfo
             Console.Write($"{Sex.ToString().PadRight((int)Columns.colSex, ' ')}");
             Console.ResetColor();
             Console.WriteLine("|");
+        }
+
+        private Ticket GetTicket()
+        {
+            var result = from ticket in TicketCreator.Tickets
+                             where ticket.ArrivalFlight.FlightNumber == FlightNumber
+                             select ticket;
+            return result.First();
         }
 
     }

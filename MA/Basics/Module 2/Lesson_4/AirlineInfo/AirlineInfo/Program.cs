@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AirlineInfo.Flights;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,12 +11,9 @@ namespace AirlineInfo
     {
         static void Main(string[] args)
         {
-            Data.maxArrivalFlight = 5;
-            Data.maxDepartureFlight = 10;
-            Data.maxPassengers = 10;
-
-            Flight[] arrivalFlights = Data.InitArrivalFlight();
-            Flight[] departureFlights = Data.InitDepartureFlight();
+            var arrivalFlights = new FlightCreator(5).InitArrivalFlight();
+            var departureFlights = new FlightCreator(10).InitDepartureFlight();
+            var ticketCreator = new Tickets.TicketCreator(20);
             var passengerCreator = new PassengerCreator(10);
 
             string menuSelect = String.Empty;
@@ -49,8 +47,9 @@ namespace AirlineInfo
                         Table.DisplayMainMenu();
                         break;
                     case "6":
-                        //Table.DisplayAllPassengersTable(passengers);
-                        Table.DisplayPassengerMenu(passengerCreator);
+                        Table.DisplayTicketsMenu(ticketCreator);
+                        Console.Clear();
+                        Table.DisplayMainMenu();
                         break;
                     case "0":
                         break;
