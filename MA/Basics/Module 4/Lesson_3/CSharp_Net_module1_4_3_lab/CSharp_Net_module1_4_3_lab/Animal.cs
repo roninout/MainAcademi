@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace CSharp_Net_module1_4_3_lab
 {
@@ -12,7 +13,12 @@ namespace CSharp_Net_module1_4_3_lab
         public string Genus { get; set; }
         public int Weight { get; set; }
 
-        public Animal(string genus, int weight)
+        public Animal()
+        {
+            Genus = "default";
+            Weight = -1;
+        }
+        public Animal(string genus, int weight) : base()
         {
             Genus = genus;
             Weight = weight;
@@ -30,20 +36,41 @@ namespace CSharp_Net_module1_4_3_lab
 
 
         // 4) declare methods SortWeightAscending(), SortGenusDescending()
-        public static IComparer SortWeightAscending()
+        public static IComparer<Animal> SortWeightAscending()
         {
-            return
+            return new SortWeightAscendingHelper(); 
         }
         // they are static and return IComparer
         // return type is custed from constructor of classes SortWeightAscendingHelper, 
         // SortGenusDescendingHelper calling 
+        public static IComparer<Animal> SortGenusDescending()
+        {
+            return new SortGenusDescendingHelper();
+        }
 
 
         // 5) declare 2 nested private classes SortWeightAscendingHelper, SortGenusDescendingHelper 
         // they implement interface IComparer
+        private class SortWeightAscendingHelper : IComparer<Animal>
+        {
+            // every nested class has implemented method Comare with 2 parameters of object and return int
+            // class SortWeightAscendingHelper sort weight by ascending
+
+            public int Compare(Animal x, Animal y)
+            {
+                return x.Weight - y.Weight;
+            }
+        }
+
         // every nested class has implemented method Comare with 2 parameters of object and return int
-        // class SortWeightAscendingHelper sort weight by ascending
         // class SortGenusDescendingHelper sort genus by descending
+        private class SortGenusDescendingHelper : IComparer<Animal>
+        {
+            public int Compare(Animal x, Animal y)
+            {
+                return y.CompareTo(x);
+            }
+        }
 
     }
 }
