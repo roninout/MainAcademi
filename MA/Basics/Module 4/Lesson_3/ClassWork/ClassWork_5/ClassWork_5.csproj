@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BF6F4C3F-363E-46DA-8BB2-C6E10A1BC5C6}</ProjectGuid>
+    <ProjectGuid>{E5C843CF-3C32-441B-BC3C-ED2FC328458C}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ClassWork_4</RootNamespace>
-    <AssemblyName>ClassWork_4</AssemblyName>
+    <RootNamespace>ClassWork_5</RootNamespace>
+    <AssemblyName>ClassWork_5</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -42,10 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomCollection.cs" />
-    <Compile Include="Element.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserCollection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

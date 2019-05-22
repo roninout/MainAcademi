@@ -2,37 +2,69 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClassWork_4
 {
-    class CustomCollection : ICollection
+    // Класс, представляющий собой пользовательскую коллекцию.
+    public class CustomCollection<T> : IEnumerable<T>, IEnumerator<T>
     {
-        private readonly Array array;
+        readonly T[] elements = new T[4];
 
-        public CustomCollection(Type type, int lenght)
+        public T this[int index]
         {
-            this.array = Array.CreateInstance(type, lenght);
+            get { return elements[index]; }
+            set { elements[index] = value; }
         }
 
-        public int Count => array.Length;
+        int position = -1;
 
-        public object SyncRoot => this;
-
-        public bool IsSynchronized => (array as ICollection).IsSynchronized;
-
-        public void CopyTo(Array array, int index)
+        // Реализация интерфейса IEnumerator<T>:
+        // 1. Метод MoveNext().
+        bool IEnumerator.MoveNext()
         {
-            //Array.CopyTo(array,this.array;
-        }
-
-        public IEnumerator GetEnumerator()
-        {
-            for (int i = 0; i < array.Length; i++)
+            if (position < elements.Length - 1)
             {
-                yield return array.GetValue(i);
+                position++;
+                return true;
             }
+            return false;
+        }
+
+        // 2. Метод Reset().
+        void IEnumerator.Reset()
+        {
+            position = -1;
+        }
+
+        // 3. Свойство Current.
+        object IEnumerator.Current
+        {
+            get { return elements[position]; }
+        }
+
+        // 4. Обобщенное свойство Current.
+        T IEnumerator<T>.Current
+        {
+            get { return elements[position]; }
+        }
+
+        // Реализация интерфейса IEnumerable<T>:
+        // 1. Метод GetEnumerator().
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this;
+        }
+        // 2. Обобщенный метод GetEnumerator().
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        {
+            return this;
+        }
+
+        // Реализация интерфейса IDisposable:
+        // 1. Метод Dispose().
+        void IDisposable.Dispose()
+        {
+            ((IEnumerator)this).Reset();
         }
     }
 }
