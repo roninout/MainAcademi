@@ -162,9 +162,23 @@ namespace CSharp_Net_module1_7_1_lab
         // WriteToMemoryStream() – save data to memory stream
         // method takes data (info about computers) as parameter
         // info about computers is saved to Memory Stream
-        public static void WriteToMemoryStream()
+        public static void WriteToMemoryStream(List<Computer> computers)
         {
+            using (var memory = new MemoryStream())
+            {
+                foreach (var computer in computers)
+                {
+                    string temp = String.Concat($"{computer.Cores},{computer.Frequency},{computer.Hdd},{computer.Memory}");
+                    byte[] bytes = Encoding.ASCII.GetBytes(temp);
 
+                    // Записываем байты в поток.
+                    for (var i = 0; i < bytes.Length; i++)
+                    {
+                        memory.WriteByte(bytes[i]);
+                    }
+                }
+                Console.WriteLine($"Запись в MemoryStream произведена успешно.");
+            }
         }
 
         // use  method GetBytes() from class UnicodeEncoding to save array of bytes from string data 

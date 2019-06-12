@@ -56,9 +56,11 @@ namespace CSharp_Net_module1_7_1_lab
             // use 
             // collection of Task with info about computers as type to get returned data from method ReadAsync()
             // use property Result of collection of Task to get access to info about computers
-            List<Task> list = new List<Task>();
-            list.Add(InOutOperation.ReadAsync());
-            list.Add(InOutOperation.ReadAsync());
+            //List<Task> tasks = new List<Task>();
+            //tasks.Add(InOutOperation.ReadAsync());
+            //tasks.Add(InOutOperation.ReadAsync());
+
+
 
             // Note:
             // print all info about computers after reading from files
@@ -69,6 +71,7 @@ namespace CSharp_Net_module1_7_1_lab
             // declare file stream and set it to null
             // call method WriteToMemory() with info about computers as parameter
             // save returned stream to file stream
+            InOutOperation.WriteToMemoryStream(computers);
 
             // call method WriteToFileFromMemory() with parameter of file stream
             // open file with saved data and compare it with input info
