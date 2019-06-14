@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<contacts>
+  <title>My Contact List</title>
+  <contact>
+    <firstname>Ivan</firstname>
+    <lastname>Petrov</lastname>
+    <address>IP address</address>
+    <tel>8-044-1234567</tel>
+    <email>ip@ip.com</email>
+    <url>www.ip.com</url>
+  </contact>
+  <contact>
+    <firstname>Petro</firstname>
+    <lastname>Sokolov</lastname>
+    <address>PS address</address>
+    <tel>8-044-7654321</tel>
+    <email>ps@ps.com</email>
+    <url>www.ps.com</url>
+  </contact>
+  <contact>
+    <firstname>Vitaliy</firstname>
+    <lastname>Salo</lastname>
+    <address>VS address</address>
+    <tel>8-044-111111</tel>
+    <email>vs@vs.com</email>
+    <url>www.vs.com</url>
+  </contact>
+</contacts>
+
